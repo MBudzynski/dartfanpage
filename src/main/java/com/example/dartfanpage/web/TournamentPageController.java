@@ -15,6 +15,7 @@ public class TournamentPageController {
     @GetMapping("/tournaments")
     String tournamentsList(Model model){
         model.addAttribute("tournaments", tournamentService.getAllTournaments());
+        model.addAttribute("activePage", "tournaments");
         return "tournament.html";
     }
 
