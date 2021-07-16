@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link th:href="@{/css/navigation.css}" rel="stylesheet" />
     <link th:href="@{/css/table.css}" rel="stylesheet" />
+    <link th:href="@{/css/button.css}" rel="stylesheet" />
     <title>Dart Polska</title>
 </head>
 <body>
@@ -16,27 +17,36 @@
     <div th:replace="/fragments/navigation :: headerNavigation"></div>
 </header>
 
+<a th:href="@{/addEditTournament}">
+<button class="button button2" type="button">Dodaj nowy turniej</button>
+</a>
+
+
 <h4 th:if=" ${ #lists.isEmpty(tournaments) }">Brak turniejów w najbliższym czsie :(</h4>
 
-<table th:if="${tournaments.size() > 0}">
+<table id="tournaments" th:if="${tournaments.size() > 0}">
     <thead>
     <tr>
-        <td>Turnieje</td>
-        <td></td>
-        <td>Wpisowe</td>
+        <th><h5>Turnieje</h5></th>
+        <th><h5>Data</h5></th>
+        <th><h5>Wpisowe</h5></th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="tournament, iterStat : ${tournaments}" >
         <td>
-            <span th:text="${tournament.placeName}"/>
-            <hr class="new4">
-            <span th:text="${tournament.city}"/>
-            <span th:text="${tournament.street}"/>
-            <span th:text="${tournament.data}"/>
-            <span th:text="${tournament.startAt}"/>
+            <h5><span th:text="${tournament.placeName}"/></h5>
+            <h6><span th:text="${tournament.city}"/>
+                <span th:text="${tournament.street}"/></h6>
         </td>
-        <td><span th:text="${tournament.entryFee}"/></td>
+        <td>
+            <h6><span th:text="${tournament.data}"/></h6>
+            <h6><span th:text="${tournament.startAt}"/></h6>
+        </td>
+        <td>
+            <h6><span th:text="${tournament.entryFee}"/></h6>
+        </td>
+        </td>
     </tr>
     </tbody>
 </table>

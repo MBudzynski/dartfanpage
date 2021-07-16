@@ -17,4 +17,8 @@ public class TournamentService {
                 .map(tournament -> tournament.toDto()).collect(Collectors.toList());
     }
 
+    public void addTournament(TournamentDto dto) {
+        Tournament tournament = Tournament.fromDto(dto);
+        tournamentRepository.save(tournament);
+    }
 }

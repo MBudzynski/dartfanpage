@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link th:href="@{/css/navigation.css}" rel="stylesheet" />
+    <link th:href="@{/css/forms.css}" rel="stylesheet" />
+    <link th:href="@{/css/button.css}" rel="stylesheet" />
+    <title>Dart Polska</title>
+</head>
+<body>
+
+<header>
+    <img th:src="@{/images/darts-arrows.jpg}" alt="Dart board with arrows" width="1300" height="400">
+    <div class="w3-display-middle w3-padding-large w3-border w3-wide w3-text-light-grey w3-center">
+        <h1 class="w3-hide-top w3-hide-small w3-xxxlarge">Dart Polska</h1>
+    </div>
+    <div th:replace="/fragments/navigation :: headerNavigation"></div>
+</header>
+
+
+<div class="from">
+    <form method="post" th:action="@{/tournaments}">
+        <label>Nazwa miejsca</label>
+        <input type="text" name="placeName" placeholder="Np.: Restauracja Browar...">
+
+        <label>Miasto</label>
+        <input type="text" name="city" placeholder="Np.: Warszawa">
+
+        <label>Ulica</label>
+        <input type="text" name="street" placeholder="Np.: Weteranów 99">
+
+        <label>Data turnieju</label>
+        <input type="date" name="data" placeholder="Np.: 2022-05-30">
+
+        <label>Czas rozpoczęcia</label>
+        <input type="time" name="startAt" placeholder="Np.: 16:00">
+
+        <label>Wpisowe w zł</label>
+        <input type="number" name="entryFee" placeholder="Np.: 30 ">
+
+
+        <button class="button button2" >Zapisz</button>
+    </form>
+</div>
+
+
+
+
+<footer class="w3-center w3-light-grey w3-padding-32">
+    <p>Wszystkie prawa zastrzeżone©. Strona zrobiona przez Michała Budzyńskiego</p>
+</footer>
+
+</body>
+</html>

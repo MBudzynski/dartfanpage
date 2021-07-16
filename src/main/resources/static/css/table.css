@@ -2,21 +2,21 @@
     font-family: Arial, Helvetica, sans-serif;
     border-collapse: collapse;
     width: 100%;
+    text-align: center;
 }
 
-#tournaments td, #customers th {
+#tournaments td, #tournaments th {
     border: 1px solid #ddd;
     padding: 8px;
 }
 
-#tournaments tr:nth-child(even){background-color: #f2f2f2;}
+#tournaments tbody tr:nth-child(even){background-color: #f2f2f2;}
 
-#tournaments tr:hover {background-color: #ddd;}
+#tournaments tr:hover {background-color: #b1b1b1;}
 
 #tournaments th {
     padding-top: 12px;
     padding-bottom: 12px;
-    text-align: left;
     background-color: #04AA6D;
     color: white;
 }
