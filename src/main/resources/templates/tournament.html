@@ -30,6 +30,7 @@
         <th><h5>Turnieje</h5></th>
         <th><h5>Data</h5></th>
         <th><h5>Wpisowe</h5></th>
+        <th>Action</th>
     </tr>
     </thead>
     <tbody>
@@ -46,6 +47,8 @@
         <td>
             <h6><span th:text="${tournament.entryFee}"/></h6>
         </td>
+        <td>
+            <a th:href="@{/tournaments/{id}(id=${tournament.id})}">Edytuj</a>
         </td>
     </tr>
     </tbody>

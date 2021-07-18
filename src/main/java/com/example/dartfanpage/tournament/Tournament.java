@@ -1,6 +1,8 @@
 package com.example.dartfanpage.tournament;
 
-import org.apache.tomcat.jni.Address;
+
+
+
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Entity;
@@ -21,6 +23,8 @@ public class Tournament {
     private String placeName;
     private String city;
     private String street;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate data;
     private LocalTime startAt;
     private BigDecimal entryFee;
@@ -47,4 +51,12 @@ public static Tournament fromDto(TournamentDto dto){
         return tournament;
 }
 
+    public void apply(TournamentDto dto) {
+        this.placeName = dto.getPlaceName();
+        this.city = dto.getCity();
+        this.street = dto.getStreet();
+        this.data = dto.getData();
+        this.startAt = dto.getStartAt();
+        this.entryFee = dto.getEntryFee();
+    }
 }
