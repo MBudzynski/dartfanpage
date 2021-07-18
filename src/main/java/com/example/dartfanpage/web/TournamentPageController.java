@@ -1,6 +1,5 @@
 package com.example.dartfanpage.web;
 
-import com.example.dartfanpage.tournament.Tournament;
 import com.example.dartfanpage.tournament.TournamentDto;
 import com.example.dartfanpage.tournament.TournamentService;
 import lombok.AllArgsConstructor;
@@ -11,10 +10,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Date;
 import java.util.Optional;
 
 @Controller
@@ -25,7 +22,7 @@ public class TournamentPageController {
 
     @GetMapping("/tournaments")
     String tournamentsList(Model model){
-        model.addAttribute("tournaments", tournamentService.getAllTournaments());
+        model.addAttribute("tournaments", tournamentService.getCurrentTournaments());
         model.addAttribute("activePage", "tournaments");
         return "tournament.html";
     }
@@ -66,5 +63,12 @@ public class TournamentPageController {
         model.addAttribute("activePage", "tournaments");
         return "addEditTournament.html";
     }
+
+    @GetMapping("/tournamentDelete/{id}")
+    String deleteTournament(@PathVariable Long id) {
+        tournamentService.delete(id);
+        return "redirect:/tournaments";
+    }
+
 
 }

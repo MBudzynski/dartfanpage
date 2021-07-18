@@ -3,6 +3,7 @@ package com.example.dartfanpage.tournament;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -13,7 +14,8 @@ public class TournamentService {
 
     private final TournamentRepository tournamentRepository;
 
-    public List<TournamentDto> getAllTournaments() {
+    public List<TournamentDto> getCurrentTournaments() {
+        removeExpiredTournaments();
         return tournamentRepository.findAll().stream()
                 .map(tournament -> tournament.toDto()).collect(Collectors.toList());
     }
@@ -33,4 +35,14 @@ public class TournamentService {
         tournament.apply(dto);
         tournamentRepository.save(tournament);
     }
+
+    public void delete(Long id) {
+        tournamentRepository.deleteById(id);
+    }
+
+    private void removeExpiredTournaments(){
+        tournamentRepository.findAll().stream().filter(tournament -> tournament.getData()
+                .isBefore(LocalDate.now())).forEach(tournament -> delete(tournament.getId()));
+    }
+
 }

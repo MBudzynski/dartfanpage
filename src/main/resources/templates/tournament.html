@@ -48,7 +48,13 @@
             <h6><span th:text="${tournament.entryFee}"/></h6>
         </td>
         <td>
-            <a th:href="@{/tournaments/{id}(id=${tournament.id})}">Edytuj</a>
+            <a th:href="@{/tournaments/{id}(id=${tournament.id})}">
+                <button type="button">Edytuj</button>
+            </a></br>
+            </br>
+            <a th:href="@{/tournamentDelete/{id}(id=${tournament.id})}">
+                <button type="button">Usuń</button>
+            </a>
         </td>
     </tr>
     </tbody>

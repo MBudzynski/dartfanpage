@@ -3,6 +3,9 @@ package com.example.dartfanpage.tournament;
 
 
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Entity;
@@ -14,6 +17,9 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 @Entity
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Tournament {
 
     @Id
@@ -59,4 +65,5 @@ public static Tournament fromDto(TournamentDto dto){
         this.startAt = dto.getStartAt();
         this.entryFee = dto.getEntryFee();
     }
+
 }
