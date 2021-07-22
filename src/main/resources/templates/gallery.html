@@ -4,10 +4,12 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link th:href="@{/css/navigation.css}" rel="stylesheet" />
+    <link th:href="@{/css/gallery.css}" rel="stylesheet" />
+    <link th:href="@{/css/button.css}" rel="stylesheet" />
+    <link th:href="@{/css/forms.css}" rel="stylesheet" />
     <title>Dart Polska</title>
 </head>
 <body>
-
 
 <header>
     <img th:src="@{/images/darts-arrows.jpg}" alt="Dart board with arrows" width="1300" height="400">
@@ -17,7 +19,34 @@
     <div th:replace="/fragments/navigation :: headerNavigation"></div>
 </header>
 
+<div class="from">
+<form method="post" enctype="multipart/form-data" th:action="@{/uploadImage}">
+    <input type="file" name="imageFile">
+    <button class="button" >Dodaj</button>
+</form>
+</div>
 
+
+<table th:if="${galleryList.size() > 0}">
+    <thead>
+    <tr>
+        <th><h5>Gallery</h5></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="image, iterStat : ${galleryList}" >
+        <td>
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" th:href="@{/gallery/{img}(img=${image})}">
+                        <img th:src="@{${'/gallery/' + image}}" width="600" height="400" >
+                    </a>
+                </div>
+            </div>
+        </td>
+    </tr>
+    </tbody>
+</table>
 
 
 <footer class="w3-center w3-light-grey w3-padding-32">

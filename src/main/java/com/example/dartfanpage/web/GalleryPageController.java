@@ -18,11 +18,12 @@ public class GalleryPageController {
     @GetMapping("/gallery")
     public String displayMainPage(Model model){
         model.addAttribute("activePage", "gallery");
+        model.addAttribute("galleryList", galleryService.getGallery());
         return "gallery.html";
     }
 
     @PostMapping("/uploadImage")
-    public String uploadImage(@RequestParam MultipartFile imageFile){
+    public String uploadImage(@RequestParam("imageFile") MultipartFile imageFile){
         try {
             galleryService.saveImage(imageFile);
         } catch (Exception e) {

@@ -1,9 +1,5 @@
 package com.example.dartfanpage.tournament;
 
-import com.example.dartfanpage.tournament.Tournament;
-import com.example.dartfanpage.tournament.TournamentDto;
-import com.example.dartfanpage.tournament.TournamentRepository;
-import com.example.dartfanpage.tournament.TournamentService;
 import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
