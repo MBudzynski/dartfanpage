@@ -1,0 +1,11 @@
+footer{
+    background-color: lightgray;
+    cursor: default;
+    padding: 32px;
+    width: 100%;
+    text-align: center;
+    clear: both;
+    position: relative;
+    margin-top: -200px;
+}
+

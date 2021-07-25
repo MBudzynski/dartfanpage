@@ -11,8 +11,13 @@ public class GalleryService {
 
     private final GalleryDao galleryDao = GalleryDao.getInstance();
 
-    public void saveImage(MultipartFile imageFile) throws Exception {
-        galleryDao.saveFile(imageFile);
+    public void saveImage(MultipartFile imageFile) {
+        try {
+            galleryDao.saveFile(imageFile);
+        } catch (Exception e) {
+            System.out.println("File don't save!!!");
+            e.printStackTrace();
+        }
     }
 
     public List<String> getGallery(){

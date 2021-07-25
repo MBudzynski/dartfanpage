@@ -22,7 +22,7 @@ div.desc {
 
 .responsive {
     padding: 0 6px;
-    float: left;
+    float: bottom;
     width: 24.99999%;
 }
 
@@ -44,3 +44,5 @@ div.desc {
     display: table;
     clear: both;
 }
+
+

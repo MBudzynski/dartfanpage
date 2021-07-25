@@ -1,6 +1,7 @@
 package com.example.dartfanpage.web;
 
 import com.example.dartfanpage.gallery.GalleryService;
+import com.example.dartfanpage.gallery.GalleryValidator;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,11 +10,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Map;
+
 @Controller
 @AllArgsConstructor
 public class GalleryPageController {
 
     private GalleryService galleryService;
+
+    private GalleryValidator galleryValidator;
 
     @GetMapping("/gallery")
     public String displayMainPage(Model model){
@@ -23,14 +28,16 @@ public class GalleryPageController {
     }
 
     @PostMapping("/uploadImage")
-    public String uploadImage(@RequestParam("imageFile") MultipartFile imageFile){
-        try {
-            galleryService.saveImage(imageFile);
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("Error saving photo " + e);
+    public String uploadImage(@RequestParam("imageFile") MultipartFile imageFile, Model model){
+        Map<String, String> errorMap = galleryValidator.isValid(imageFile);
+        if (errorMap.isEmpty()) {
+                galleryService.saveImage(imageFile);
+            return "redirect:/gallery";
         }
-        return "redirect:/gallery";
+        model.addAttribute("activePage", "gallery");
+        model.addAttribute("galleryList", galleryService.getGallery());
+        model.addAttribute(errorMap);
+        return "gallery";
     }
 
 }
