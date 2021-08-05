@@ -6,7 +6,6 @@
     <link th:href="@{/css/navigation.css}" rel="stylesheet" />
     <link th:href="@{/css/forms.css}" rel="stylesheet" />
     <link th:href="@{/css/button.css}" rel="stylesheet" />
-    <link th:href="@{/css/footer.css}" rel="stylesheet" />
     <title>Dart Polska</title>
 </head>
 <body>
@@ -31,6 +30,16 @@
 
         <label>Ulica</label>
         <input th:field="*{street}" type="text" name="street" placeholder="Np.: Weteranów 99">
+
+
+        <label>Nr lokalu</label>
+        <input th:field="*{venueNumber}" type="text" name="street" placeholder="Np.: 14a , 15/72">
+
+        <label>Kod pocztowy</label>
+        <input th:field="*{zipCode}" type="text" name="street" placeholder="Np.:20-601">
+
+        <label>Poczta</label>
+        <input th:field="*{postOffice}" type="text" name="street" placeholder="Np.:Lublin">
 
         <label>Data turnieju</label>
         <input type="date" th:value="*{data}" name="data" placeholder="dd-MM-yyyy">

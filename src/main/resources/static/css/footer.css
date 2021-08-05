@@ -1,11 +1,10 @@
-footer{
-    background-color: lightgray;
-    cursor: default;
-    padding: 32px;
-    width: 100%;
-    text-align: center;
-    clear: both;
-    position: relative;
+footer {
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+    background-color: #45a1ff;
+    color: #fff;
     margin-top: -200px;
 }
+
 

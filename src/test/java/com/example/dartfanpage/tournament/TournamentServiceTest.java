@@ -38,11 +38,11 @@ class TournamentServiceTest {
     @Test
     void shouldRemoveOneExpiredTournament(){
         //given
-        Tournament tournament1 = new Tournament(null, "Zamek", "Lublin", "ul. Zamkowa",
+        Tournament tournament1 = new Tournament(null, "Zamek", "Lublin", "Zamkowa", "14a", "22-601", "Lublin",
                 LocalDate.now().plusDays(5), LocalTime.now(), new BigDecimal(100));
-        Tournament tournament2 = new Tournament(null, "Browar", "Poznań", "ul. Browarna",
+        Tournament tournament2 = new Tournament(null, "Browar", "Poznań", "ul. Browarna", "89a", "28-601", "Poznań",
                 LocalDate.now().plusDays(5), LocalTime.now(), new BigDecimal(100));
-        Tournament tournament3 = new Tournament(null, "Karczma", "Warszawa", "ul. Pogodna",
+        Tournament tournament3 = new Tournament(null, "Karczma", "Warszawa", "ul. Pogodna", "150/86", "03-330", "Warszawa",
                 LocalDate.now().minusDays(5), LocalTime.now(), new BigDecimal(150));
         //when
         repository.saveAll(Lists.list(tournament1, tournament2, tournament3));
@@ -55,7 +55,7 @@ class TournamentServiceTest {
     @Test
     void shouldPersistTournamentInDb(){
         //given
-        Tournament tournament1 = new Tournament(null, "Zamek", "Lublin", "ul. Zamkowa",
+        Tournament tournament1 = new Tournament(null, "Zamek", "Lublin", "ul. Zamkowa","14a", "22-601", "Lublin",
                 LocalDate.now().plusDays(5), LocalTime.now(), new BigDecimal(100));
         //when
         service.addTournament(tournament1.toDto());

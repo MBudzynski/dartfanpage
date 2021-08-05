@@ -15,6 +15,9 @@ public class TournamentDto {
     private String placeName;
     private String city;
     private String street;
+    private String venueNumber;
+    private String zipCode;
+    private String postOffice;
     private LocalDate data;
     private LocalTime startAt;
     private BigDecimal entryFee;
@@ -22,21 +25,31 @@ public class TournamentDto {
     public TournamentDto() {
     }
 
-    public TournamentDto(Long id, String placeName, String city, String street, LocalDate data, LocalTime startAt, BigDecimal entryFee) {
+    public TournamentDto(Long id, String placeName, String city, String street,
+                         String venueNumber, String zipCode, String postOffice, LocalDate data,
+                         LocalTime startAt, BigDecimal entryFee) {
         this.id = id;
         this.placeName = placeName;
         this.city = city;
         this.street = street;
+        this.venueNumber = venueNumber;
+        this.zipCode = zipCode;
+        this.postOffice = postOffice;
         this.data = data;
         this.startAt = startAt;
         this.entryFee = entryFee;
     }
 
-    public TournamentDto (String placeName, String city, String street, LocalDate data, LocalTime startAt, BigDecimal entryFee) {
+    public TournamentDto (String placeName, String city, String street,
+                          String venueNumber, String zipCode, String postOffice, LocalDate data,
+                          LocalTime startAt, BigDecimal entryFee) {
         this.placeName = placeName;
         this.city = city;
         this.street = street;
         this.data = data;
+        this.venueNumber = venueNumber;
+        this.zipCode = zipCode;
+        this.postOffice = postOffice;
         this.startAt = startAt;
         this.entryFee = entryFee;
     }

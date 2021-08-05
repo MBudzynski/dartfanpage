@@ -29,6 +29,9 @@ public class Tournament {
     private String placeName;
     private String city;
     private String street;
+    private String venueNumber;
+    private String zipCode;
+    private String postOffice;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate data;
@@ -41,6 +44,9 @@ public class Tournament {
                 this.placeName,
                 this.city,
                 this.street,
+                this.venueNumber,
+                this.zipCode,
+                this.postOffice,
                 this.data,
                 this.startAt,
                 this.entryFee);
@@ -51,6 +57,9 @@ public static Tournament fromDto(TournamentDto dto){
         tournament.placeName = dto.getPlaceName();
         tournament.city = dto.getCity();
         tournament.street = dto.getStreet();
+        tournament.venueNumber = dto.getVenueNumber();
+        tournament.zipCode = dto.getZipCode();
+        tournament.postOffice = dto.getPostOffice();
         tournament.data = dto.getData();
         tournament.startAt = dto.getStartAt();
         tournament.entryFee= dto.getEntryFee();
@@ -61,6 +70,9 @@ public static Tournament fromDto(TournamentDto dto){
         this.placeName = dto.getPlaceName();
         this.city = dto.getCity();
         this.street = dto.getStreet();
+        this.venueNumber = dto.getVenueNumber();
+        this.zipCode = dto.getZipCode();
+        this.postOffice = dto.getPostOffice();
         this.data = dto.getData();
         this.startAt = dto.getStartAt();
         this.entryFee = dto.getEntryFee();

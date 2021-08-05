@@ -6,7 +6,6 @@
     <link th:href="@{/css/navigation.css}" rel="stylesheet" />
     <link th:href="@{/css/table.css}" rel="stylesheet" />
     <link th:href="@{/css/button.css}" rel="stylesheet" />
-    <link th:href="@{/css/footer.css}" rel="stylesheet" />
     <title>Dart Polska</title>
 </head>
 <body>
@@ -29,6 +28,7 @@
     <thead>
     <tr>
         <th><h5>Turnieje</h5></th>
+        <th><h5>Adres</h5></th>
         <th><h5>Data</h5></th>
         <th><h5>Wpisowe</h5></th>
         <th>Action</th>
@@ -38,8 +38,13 @@
     <tr th:each="tournament, iterStat : ${tournaments}" >
         <td>
             <h5><span th:text="${tournament.placeName}"/></h5>
-            <h6><span th:text="${tournament.city}"/>
-                <span th:text="${tournament.street}"/></h6>
+            <h6><span th:text="${tournament.city}"/></h6>
+        </td>
+        <td>
+            <h6><span th:text="${tournament.street}"/>
+                <span th:text="${tournament.venueNumber}"/></h6>
+            <h6><span th:text="${tournament.zipCode}"/>
+                <span th:text="${tournament.postOffice}"/></h6>
         </td>
         <td>
             <h6><span th:text="${tournament.data}"/></h6>
@@ -64,5 +69,6 @@
 <footer>
     <p>Wszystkie prawa zastrzeżone©. Strona zrobiona przez Michała Budzyńskiego</p>
 </footer>
+
 </body>
 </html>
