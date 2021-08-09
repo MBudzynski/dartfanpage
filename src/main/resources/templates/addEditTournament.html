@@ -7,6 +7,11 @@
     <link th:href="@{/css/forms.css}" rel="stylesheet" />
     <link th:href="@{/css/button.css}" rel="stylesheet" />
     <title>Dart Polska</title>
+    <style>
+        p{
+            color: #FF0000;
+        }
+    </style>
 </head>
 <body>
 
@@ -24,38 +29,46 @@
         <input type="hidden"  th:field="*{id}"/>
         <label>Nazwa miejsca</label>
         <input th:field="*{placeName}" type="text" name="placeName" placeholder="Np.: Restauracja Browar...">
+        <p class="error" th:text="${placeNameError}" th:if="${placeNameError}"></p>
+
 
         <label>Miasto</label>
         <input th:field="*{city}" type="text" name="city" placeholder="Np.: Warszawa">
+        <p class="error" th:text="${cityError}" th:if="${cityError}"></p>
 
         <label>Ulica</label>
-        <input th:field="*{street}" type="text" name="street" placeholder="Np.: Weteranów 99">
-
+        <input th:field="*{street}" type="text" name="street" placeholder="Np.: Weteranów">
+        <p class="error" th:text="${streetError}" th:if="${streetError}"></p>
 
         <label>Nr lokalu</label>
-        <input th:field="*{venueNumber}" type="text" name="street" placeholder="Np.: 14a , 15/72">
+        <input th:field="*{venueNumber}" type="text" name="venueNumber" placeholder="Np.: 14a , 15/72">
+        <p class="error" th:text="${venueNumberError}" th:if="${venueNumberError}"></p>
 
         <label>Kod pocztowy</label>
-        <input th:field="*{zipCode}" type="text" name="street" placeholder="Np.:20-601">
+        <input th:field="*{zipCode}" type="text" name="zipCode" placeholder="Np.:20-601">
+        <p class="error" th:text="${zipCodeError}" th:if="${zipCodeError}"></p>
 
         <label>Poczta</label>
-        <input th:field="*{postOffice}" type="text" name="street" placeholder="Np.:Lublin">
+        <input th:field="*{postOffice}" type="text" name="postOffice" placeholder="Np.:Lublin">
+        <p th:text="${postOfficeError}" th:if="${postOfficeError}"></p>
+
 
         <label>Data turnieju</label>
-        <input type="date" th:value="*{data}" name="data" placeholder="dd-MM-yyyy">
+        <input type="date" th:value="*{data}" name="data" >
+        <p class="error" th:text="${dateError}" th:if="${dateError}"></p>
 
         <label>Czas rozpoczęcia</label>
         <input th:field="*{startAt}" type="time" name="startAt" placeholder="Np.: 16:00">
+        <p class="error" th:text="${startAtError}" th:if="${startAtError}"></p>
 
         <label>Wpisowe w zł</label>
         <input th:field="*{entryFee}" type="number" name="entryFee" placeholder="Np.: 30 ">
+        <p class="error"  th:text="${entryFeeError}" th:if="${entryFeeError}"></p>
 
 
         <button class="button button2" >Zapisz</button>
     </form>
 </div>
-
-
 
 
 <footer>

@@ -25,30 +25,30 @@ public class TournamentPageController {
     private final TournamentValidator tournamentValidator;
 
     @GetMapping("/tournaments")
-    String tournamentsList(Model model){
+    String tournamentsList(Model model) {
         model.addAttribute("tournaments", tournamentService.getCurrentTournaments());
         model.addAttribute("activePage", "tournaments");
         return "tournament.html";
     }
 
     @GetMapping("/addEditTournament")
-    String displayAddEditTournamentPage(Model model, TournamentDto dto){
+    String displayAddEditTournamentPage(Model model, TournamentDto dto) {
         model.addAttribute("activePage", "tournaments");
         model.addAttribute("tournament", dto);
         return "addEditTournament.html";
     }
 
     @PostMapping("/tournaments")
-    String addOrEditTournament(@RequestParam(required=false) Long id,
-                      @RequestParam String placeName,
-                      @RequestParam String city,
-                      @RequestParam String street,
-                      @RequestParam String venueNumber,
-                      @RequestParam String zipCode,
-                      @RequestParam String postOffice,
-                      @RequestParam("data") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate data,
-                      @RequestParam LocalTime startAt,
-                      @RequestParam BigDecimal entryFee,
+    String addOrEditTournament(@RequestParam(required = false) Long id,
+                               @RequestParam String placeName,
+                               @RequestParam String city,
+                               @RequestParam String street,
+                               @RequestParam String venueNumber,
+                               @RequestParam String zipCode,
+                               @RequestParam String postOffice,
+                               @RequestParam("data") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate data,
+                               @RequestParam LocalTime startAt,
+                               @RequestParam BigDecimal entryFee,
                                Model model) {
 
         TournamentDto dto = new TournamentDto(id, placeName, city, street, venueNumber, zipCode, postOffice,
@@ -56,19 +56,19 @@ public class TournamentPageController {
 
         Map<String, String> errorMap = tournamentValidator.isValid(dto);
 
-        if(errorMap.isEmpty()){
+        if (errorMap.isEmpty()) {
             if (id == null) {
                 tournamentService.addTournament(dto);
             } else {
                 tournamentService.update(dto);
             }
             return "redirect:/tournaments";
-        } else {
-            model.addAttribute("activePage", "tournaments");
-            model.addAttribute("tournament", dto);
-            model.addAttribute(errorMap);
-            return "addEditTournament.html";
         }
+        model.addAttribute("activePage", "tournaments");
+        model.addAttribute("tournament", dto);
+        model.addAllAttributes(errorMap);
+        return "addEditTournament.html";
+
 
     }
 

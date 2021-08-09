@@ -54,5 +54,7 @@ public class TournamentDto {
         this.entryFee = entryFee;
     }
 
-
+    public String getPostOffice() {
+        return postOffice;
+    }
 }
