@@ -14,5 +14,4 @@ public class SmtpProperties {
     private Integer port;
     private String user;
     private String password;
-    private String from;
 }

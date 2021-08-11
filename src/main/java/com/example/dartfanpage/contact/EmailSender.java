@@ -31,10 +31,9 @@ public class EmailSender {
     private Message prepareMessage(Session session, Email email) {
         try {
             Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(email.getEMailAddress()));
             message.setRecipient(Message.RecipientType.TO, new InternetAddress(smtpProperties.getUser()));
-            message.setSubject(email.getTitle());
-            message.setText(email.getText());
+            message.setSubject("Message send from webpage: " + email.getTitle());
+            message.setText("Coresponding address: " + email.getEMailAddress() + "\n" +email.getText());
             return message;
         } catch (Exception ex) {
             Logger.getLogger(EmailSender.class.getName()).log(Level.SEVERE, null, ex);

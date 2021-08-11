@@ -8,7 +8,6 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class Email {
-    private String name;
     private String eMailAddress;
     private String title;
     private String text;
