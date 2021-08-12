@@ -23,29 +23,32 @@
 </div>
 
 <div class="container">
-    <form method="post" th:action="@{/sendEmail}" th:object="${registrationUserDto}">
+    <form method="post" th:action="@{/sendEmail}" th:object="${eMail}">
         <div class="row">
             <div class="col-25">
-                <label for="fname">Email</label>
+                <label for="eMailAddress">Email</label>
             </div>
             <div class="col-75">
-                <input type="text" id="fname" name="eMailAddress" placeholder="Twój adress e-mail">
+                <input th:field="*{eMailAddress}" type="text" id="eMailAddress" name="eMailAddress" placeholder="Twój adress e-mail">
+                <p class="error" th:text="${emailAddressError}" th:if="${emailAddressError}"></p>
             </div>
         </div>
         <div class="row">
             <div class="col-25">
-                <label for="lname">Tytuł</label>
+                <label for="title">Tytuł</label>
             </div>
             <div class="col-75">
-                <input type="text" id="lname" name="title" placeholder="Temat wiadomości">
+                <input th:field="*{title}" type="text" id="title" name="title" placeholder="Temat wiadomości">
+                <p class="error" th:text="${titleError}" th:if="${titleError}"></p>
             </div>
         </div>
         <div class="row">
             <div class="col-25">
-                <label for="subject">Wiadomość</label>
+                <label for="text">Wiadomość</label>
             </div>
             <div class="col-75">
-                <textarea id="subject" name="text" placeholder="Text wiadomości.." style="height:200px"></textarea>
+                <textarea th:field="*{text}" id="text" name="text" placeholder="Text wiadomości.." style="height:200px"></textarea>
+                <p class="error" th:text="${textError}" th:if="${textError}"></p>
             </div>
         </div>
         <div class="row">
