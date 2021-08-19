@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link th:href="@{/css/navigation.css}" rel="stylesheet" />
+    <title>Dart Polska</title>
+</head>
+<body>
+<header>
+    <img th:src="@{/images/darts-arrows.jpg}" alt="Dart board with arrows" width="1300" height="400"/>
+    <div class="w3-display-middle w3-padding-large w3-border w3-wide w3-text-light-grey w3-center">
+        <h1 class="w3-hide-top w3-hide-small w3-xxxlarge">Dart Polska</h1>
+    </div>
+    <div th:replace="/fragments/navigation :: headerNavigation"></div>
+</header>
+
+<div class="from">
+    <form method="post" th:action="@{/addArticle}" enctype="multipart/form-data" >
+
+
+        <div class="col-75">
+            <textarea id="author" name="author" placeholder="Author..." style="height:200px"></textarea>
+        </div>
+        <div class="col-75">
+            <input type="file" name="articlePicture">
+        </div>
+        <div class="col-75">
+            <textarea id="title" name="title" placeholder="Title..." style="height:200px"></textarea>
+        </div>
+        <div class="col-75">
+            <textarea id="headline" name="headline" placeholder="Head line..." style="height:200px"></textarea>
+        </div>
+        <div class="col-75">
+            <textarea id="text" name="text" placeholder="Text..." style="height:200px"></textarea>
+        </div>
+
+
+        <button class="button button2" >Opublikuj</button>
+    </form>
+</div>
+
+
+<footer>
+    <p>Wszystkie prawa zastrzeżone©. Strona zrobiona przez Michała Budzyńskiego</p>
+</footer>
+</body>
+</html>

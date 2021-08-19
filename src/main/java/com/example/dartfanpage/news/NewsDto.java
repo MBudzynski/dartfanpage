@@ -12,12 +12,12 @@ public class NewsDto {
     private Long id;
     private String author;
     private LocalDate publicationDate;
-    private byte[] picture;
+    private String picture;
     private String title;
     private String headline;
     private String text;
 
-    public NewsDto(Long id, String author, LocalDate publicationDate, byte[] picture, String title, String headline, String text) {
+    public NewsDto(Long id, String author, LocalDate publicationDate, String picture, String title, String headline, String text) {
         this.id = id;
         this.author = author;
         this.publicationDate = publicationDate;
@@ -27,7 +27,7 @@ public class NewsDto {
         this.text = text;
     }
 
-    public NewsDto(String author, LocalDate publicationDate, byte[] picture, String title, String headline, String text) {
+    public NewsDto(String author, LocalDate publicationDate, String picture, String title, String headline, String text) {
         this.author = author;
         this.publicationDate = publicationDate;
         this.picture = picture;

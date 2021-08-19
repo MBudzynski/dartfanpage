@@ -1,6 +1,7 @@
 package com.example.dartfanpage.web;
 
 import com.example.dartfanpage.news.NewsService;
+import com.example.dartfanpage.tournament.TournamentDto;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,23 +19,29 @@ public class MainPageController {
 
     @GetMapping("/")
     public String displayMainPage(Model model){
-        model.addAttribute("activePage", "main");
         model.addAttribute("news", newsService.getAllNews());
+        model.addAttribute("activePage", "main");
         return "main.html";
     }
 
-    @PostMapping("/addNews")
+    @GetMapping("/addArticle")
+    String displayAddEditTournamentPage(Model model, TournamentDto dto) {
+        model.addAttribute("activePage", "main");
+        return "addArticle.html";
+    }
+
+    @PostMapping("/addArticle")
     public String addNews(@RequestParam String author,
-                          @RequestParam("imageFile") MultipartFile articlePicture,
+                          @RequestParam("articlePicture") MultipartFile articlePicture,
                           @RequestParam String title,
                           @RequestParam String headline,
                           @RequestParam String text){
 
         String response = newsService.saveNews(author, articlePicture, title, headline, text);
         if(response.equals("Article saved")) {
-            return "main.html";
+            return "redirect:/";
         }else {
-         return "addArticle";
+         return "addArticle.html";
         }
     }
 

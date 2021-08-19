@@ -15,7 +15,7 @@ public class News {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate publicationDate;
     @Lob
-    private byte[] picture;
+    private String picture;
     private String title;
     private String headline;
     @Lob
