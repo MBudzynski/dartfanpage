@@ -1,11 +1,19 @@
 package com.example.dartfanpage.news;
 
+import com.example.dartfanpage.news.picture.Picture;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
+@Getter
+@NoArgsConstructor
 public class News {
 
     @Id
@@ -15,32 +23,39 @@ public class News {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate publicationDate;
     @Lob
-    private String picture;
+    private String mainPicture;
     private String title;
     private String headline;
     @Lob
     private String text;
+    @OneToMany(mappedBy = "news",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY,
+            orphanRemoval = true)
+    private List<Picture> pictures;
 
-    public NewsDto toDto() {
-        return new NewsDto(
-                this.id,
-                this.author,
-                this.publicationDate,
-                this.picture,
-                this.title,
-                this.headline,
-                this.text);
+    @Builder(toBuilder = true)
+    public News(Long id,
+                String author,
+                LocalDate publicationDate,
+                String mainPicture,
+                String title,
+                String headline,
+                String text,
+                List<Picture> pictures) {
+        this.id = id;
+        this.author = author;
+        this.publicationDate = publicationDate;
+        this.mainPicture = mainPicture;
+        this.title = title;
+        this.headline = headline;
+        this.text = text;
+        this.pictures = attachParentToPicture(pictures);
     }
 
-    public static News fromDto(NewsDto dto){
-        News news = new News();
-        news.author = dto.getAuthor();
-        news.publicationDate = dto.getPublicationDate();
-        news.picture = dto.getPicture();
-        news.title = dto.getTitle();
-        news.headline = dto.getHeadline();
-        news.text = dto.getText();
-        return news;
+    private List<Picture> attachParentToPicture(List<Picture> pictures) {
+        return pictures.stream()
+                .map(equipment -> equipment.toBuilder().news(this).build())
+                .collect(Collectors.toUnmodifiableList());
     }
-
 }
