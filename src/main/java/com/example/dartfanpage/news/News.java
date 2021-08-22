@@ -1,5 +1,6 @@
 package com.example.dartfanpage.news;
 
+import com.example.dartfanpage.news.comment.Comment;
 import com.example.dartfanpage.news.picture.Picture;
 import lombok.Builder;
 import lombok.Getter;
@@ -8,6 +9,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,7 +19,7 @@ import java.util.stream.Collectors;
 public class News {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String author;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -34,6 +36,12 @@ public class News {
             orphanRemoval = true)
     private List<Picture> pictures;
 
+    @OneToMany(mappedBy = "news",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY,
+            orphanRemoval = true)
+    private List<Comment> comments = new ArrayList<>();
+
     @Builder(toBuilder = true)
     public News(Long id,
                 String author,
@@ -42,7 +50,8 @@ public class News {
                 String title,
                 String headline,
                 String text,
-                List<Picture> pictures) {
+                List<Picture> pictures,
+                List<Comment> comments) {
         this.id = id;
         this.author = author;
         this.publicationDate = publicationDate;
@@ -51,6 +60,7 @@ public class News {
         this.headline = headline;
         this.text = text;
         this.pictures = attachParentToPicture(pictures);
+        this.comments = comments;
     }
 
     private List<Picture> attachParentToPicture(List<Picture> pictures) {

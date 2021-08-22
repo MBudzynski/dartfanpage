@@ -1,5 +1,8 @@
 package com.example.dartfanpage.news;
 
+import com.example.dartfanpage.news.comment.Comment;
+import com.example.dartfanpage.news.comment.CommentDto;
+import com.example.dartfanpage.news.comment.CommentRepository;
 import com.example.dartfanpage.news.picture.PictureDto;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,6 +21,7 @@ public class NewsService {
     private final ImageDao imageDao = ImageDao.getInstance();
 
     private final NewsRepository newsRepository;
+    private final CommentRepository commentRepository;
 
     public List<NewsDto> getAllNews() {
         return newsRepository.findAll().stream().map(news -> NewsDto.toDto(news)).collect(Collectors.toList());
@@ -37,7 +41,9 @@ public class NewsService {
                 .build();
 
         saveImageOnDirectory(mainPicture);
-        Arrays.stream(pictures).forEach(picture-> saveImageOnDirectory(picture));
+        if(pictures == null){
+            Arrays.stream(pictures).forEach(picture-> saveImageOnDirectory(picture));
+        }
 
         if (newsDto.getMainPicture() != null) {
             newsRepository.save(newsDto.fromDto());
@@ -63,4 +69,8 @@ public class NewsService {
       return Arrays.stream(pictures).map(picture -> PictureDto.builder().pictureName(picture.getOriginalFilename()).build()).collect(Collectors.toList());
     }
 
+    public void addComment(CommentDto commentDto) {
+        Comment comment = commentDto.fromDto();
+        commentRepository.save(comment);
+    }
 }

@@ -18,13 +18,42 @@
     <button class="button button2" type="button">Powrót do strony głównej</button>
 </a>
 
-<h5><span th:text="${news.author}"></span><span th:text="${news.publicationDate}"</span></h5>
+<h5><span th:text="${news.author}"></span><span th:text="${news.publicationDate}"/></h5>
 <h3><span th:text="${news.title}"/></h3>
 <img th:src="@{/images/} + ${news.mainPicture}" width="300" height="150">
 <h4><span th:text="${news.headline}"/></h4>
 <h5><span th:text="${news.text}"/></h5>
 
+<div th:if=" ${ #lists.isEmpty(news.pictures) }">
+    <div th:each="picture, iterStat : ${news.pictures}">
+        <div class="gallery">
+            <img th:src="@{/images/} + ${picture.pictureName}" width="200" height="100">
+            </a>
+        </div>
+    </div>
+</div>
 
+<div th:each="comment, iterStat : ${news.comments}">
+    <div>
+        <h5><span th:text="${comment.dataTime}"/></h5>
+        <h5><span th:text="${comment.author}"/></h5>
+        <h5><span th:text="${comment.text}"/></h5>
+    </div>
+</div>
+
+
+
+<form method="post" th:action="@{/addComment}">
+
+        <input type="hidden"  name="id" th:value="${news.id}">
+
+    <input name="author" type="text">
+
+    <textarea name="text" placeholder="Text..." style="height:200px"></textarea>
+    <a style="float:right" th:href="@{/news/{id}(id=${news.id})}">
+    <button class="button button2" >Opublikuj</button>
+    </a>
+</form>
 
 <footer>
     <p>Wszystkie prawa zastrzeżone©. Strona zrobiona przez Michała Budzyńskiego</p>

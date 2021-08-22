@@ -30,7 +30,7 @@
         <td>
             <h6><span th:text="${news.author}"/> <span th:text="${news.publicationDate}"/></h6>
             <img th:src="@{/images/} + ${news.mainPicture}" width="300" height="150">
-            <h5><span th:text="${news.title}"/><a style="float:right" th:href="@{/news/{id}(id=${news.id})}">Czytaj więcej</a>></h5>
+            <h5><span th:text="${news.title}"/><a style="float:right" th:href="@{/news/{id}(id=${news.id})}">Czytaj więcej</a></h5>
         </td>
     </tr>
     </tbody>
