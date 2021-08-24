@@ -27,18 +27,9 @@ public class NewsService {
         return newsRepository.findAll().stream().map(news -> NewsDto.toDto(news)).collect(Collectors.toList());
     }
 
-    public String saveNews(String author, MultipartFile mainPicture, String title,
-                           String headline, String text, MultipartFile[] pictures) {
+    public String saveNews(NewsDto newsDto ,MultipartFile mainPicture, MultipartFile[] pictures) {
 
-        NewsDto newsDto = NewsDto.builder()
-                .author(author)
-                .title(title)
-                .publicationDate(LocalDate.now())
-                .mainPicture(mainPicture.getOriginalFilename())
-                .headline(headline)
-                .text(text)
-                .pictures(multipartFileConverter(pictures))
-                .build();
+        newsDto.setPictures(multipartFileConverter(pictures));
 
         saveImageOnDirectory(mainPicture);
         if(pictures == null){

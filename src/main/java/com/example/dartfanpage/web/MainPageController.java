@@ -2,7 +2,9 @@ package com.example.dartfanpage.web;
 
 import com.example.dartfanpage.news.NewsDto;
 import com.example.dartfanpage.news.NewsService;
+import com.example.dartfanpage.news.NewsValidator;
 import com.example.dartfanpage.news.comment.CommentDto;
+import com.example.dartfanpage.news.comment.CommentValidator;
 import com.example.dartfanpage.tournament.TournamentDto;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -10,8 +12,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Map;
 import java.util.Optional;
+
 
 
 @Controller
@@ -19,6 +24,8 @@ import java.util.Optional;
 public class MainPageController {
 
     private NewsService newsService;
+    private CommentValidator commentValidator;
+    private NewsValidator newsValidator;
 
     @GetMapping("/")
     public String displayMainPage(Model model){
@@ -28,8 +35,10 @@ public class MainPageController {
     }
 
     @GetMapping("/addArticle")
-    String displayAddEditTournamentPage(Model model, TournamentDto dto) {
+    String displayAddArticlePage(Model model) {
+        NewsDto newsDto = new NewsDto();
         model.addAttribute("activePage", "main");
+        model.addAttribute("news", newsDto);
         return "addArticle.html";
     }
 
@@ -39,14 +48,30 @@ public class MainPageController {
                           @RequestParam String title,
                           @RequestParam String headline,
                           @RequestParam String text,
-                          @RequestParam("pictures") MultipartFile[] pictures){
+                          @RequestParam("pictures") MultipartFile[] pictures, Model model){
 
-        String response = newsService.saveNews(author, mainPicture, title, headline, text, pictures);
-        if(response.equals("Article saved")) {
-            return "redirect:/";
-        }else {
-         return "addArticle.html";
+        NewsDto newsDto = NewsDto.builder()
+                .author(author)
+                .title(title)
+                .publicationDate(LocalDate.now())
+                .mainPicture(mainPicture.getOriginalFilename())
+                .headline(headline)
+                .text(text)
+                .build();
+
+        Map<String, String> newsError = newsValidator.isValid(newsDto);
+        if(newsError.isEmpty()){
+            String response = newsService.saveNews(newsDto, mainPicture,  pictures);
+            if(response.equals("Article saved")) {
+                return "redirect:/";
+            }else {
+                return "addArticle.html";
+            }
         }
+        model.addAttribute("activePage", "main");
+        model.addAllAttributes(newsError);
+        model.addAttribute("news", newsDto);
+        return "addArticle.html";
     }
 
     @GetMapping("/news/{id}")
@@ -57,20 +82,27 @@ public class MainPageController {
         }
         model.addAttribute("news", newsById.get());
         model.addAttribute("activePage", "main");
+        model.addAttribute("text", "");
         return "newsPage.html";
     }
 
     @PostMapping("/addComment")
-    String addComment(@RequestParam Long id,
-                      @RequestParam String author,
-                      @RequestParam String text){
+    String addComment(@RequestParam Long id,@RequestParam String author,
+                      @RequestParam String text, Model model){
+        Map<String, String> commentError = commentValidator.isValid(text);
+        if(commentError.isEmpty()){
+            NewsDto newsDto = newsService.findNewsById(id).get();
+            CommentDto commentDto = CommentDto.builder().author(author).text(text)
+                    .dataTime(LocalDateTime.now()).news(newsDto).build();
+            newsService.addComment(commentDto);
 
-        NewsDto newsDto = newsService.findNewsById(id).get();
-        CommentDto commentDto = CommentDto.builder().author(author).text(text)
-                .dataTime(LocalDateTime.now()).news(newsDto).build();
-        newsService.addComment(commentDto);
-
-        return "redirect:/news/" + id;
+            return "redirect:/news/" + id;
+        }
+        model.addAllAttributes(commentError);
+        model.addAttribute("news", newsService.findNewsById(id).get());
+        model.addAttribute("activePage", "main");
+        model.addAttribute("text", "");
+        return "newsPage.html";
     }
 
 }

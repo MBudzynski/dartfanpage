@@ -18,6 +18,8 @@
     <button class="button button2" type="button">Powrót do strony głównej</button>
 </a>
 
+<p style="color: white; background-color: red" th:text="${commentTextError}" th:if="${commentTextError}"></p>
+
 <h5><span th:text="${news.author}"></span><span th:text="${news.publicationDate}"/></h5>
 <h3><span th:text="${news.title}"/></h3>
 <img th:src="@{/images/} + ${news.mainPicture}" width="300" height="150">
@@ -45,14 +47,16 @@
 
 <form method="post" th:action="@{/addComment}">
 
-        <input type="hidden"  name="id" th:value="${news.id}">
+    <input type="hidden"  name="id" th:value="${news.id}">
 
     <input name="author" type="text">
 
-    <textarea name="text" placeholder="Text..." style="height:200px"></textarea>
-    <a style="float:right" th:href="@{/news/{id}(id=${news.id})}">
+    <textarea name="text" th:text="${text}" placeholder="Text..." style="height:200px"></textarea>
+    <p th:if="${#fields.hasErrors('text')}" th:errors="*{text}">Name Error</p>
+
+
     <button class="button button2" >Opublikuj</button>
-    </a>
+
 </form>
 
 <footer>

@@ -9,11 +9,10 @@ import lombok.Setter;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.stream.Collectors;
+
 
 @Getter
 @Setter
-@Builder(toBuilder = true)
 public class NewsDto {
 
     private Long id;
@@ -25,6 +24,22 @@ public class NewsDto {
     private String text;
     private List<PictureDto> pictures;
     private List<CommentDto> comments;
+    @Builder(toBuilder = true)
+    public NewsDto(Long id, String author, LocalDate publicationDate, String mainPicture,
+                   String title, String headline, String text, List<PictureDto> pictures, List<CommentDto> comments) {
+        this.id = id;
+        this.author = author;
+        this.publicationDate = publicationDate;
+        this.mainPicture = mainPicture;
+        this.title = title;
+        this.headline = headline;
+        this.text = text;
+        this.pictures = pictures;
+        this.comments = comments;
+    }
+
+    public NewsDto() {
+    }
 
     public News fromDto(){
             return News.builder()
@@ -57,4 +72,5 @@ public class NewsDto {
     public void addCommentToList(CommentDto commentDto){
         this.comments.add(commentDto);
     }
+
 }

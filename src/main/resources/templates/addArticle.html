@@ -5,6 +5,9 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link th:href="@{/css/navigation.css}" rel="stylesheet" />
     <title>Dart Polska</title>
+    <style>
+
+    </style>
 </head>
 <body>
 <header>
@@ -20,19 +23,23 @@
 
 
         <div class="col-75">
-            <textarea id="author" name="author" placeholder="Author..." style="height:200px"></textarea>
+            <textarea th:field="*{news.author}" id="author" name="author" placeholder="Author..." style="height:200px"></textarea>
+            <p style="color: white; background-color: red" th:text="${authorError}" th:if="${authorError}"></p>
         </div>
         <div class="col-75">
             <input type="file" name="mainPicture">
         </div>
         <div class="col-75">
-            <textarea id="title" name="title" placeholder="Title..." style="height:200px"></textarea>
+            <textarea th:field="*{news.title}" id="title" name="title" placeholder="Title..." style="height:200px"></textarea>
+            <p style="color: white; background-color: red" th:text="${titleError}" th:if="${titleError}"></p>
         </div>
         <div class="col-75">
-            <textarea id="headline" name="headline" placeholder="Head line..." style="height:200px"></textarea>
+            <textarea th:field="*{news.headline}" id="headline" name="headline" placeholder="Head line..." style="height:200px"></textarea>
+            <p style="color: white; background-color: red" th:text="${headlineError}" th:if="${headlineError}"></p>
         </div>
         <div class="col-75">
-            <textarea id="text" name="text" placeholder="Text..." style="height:200px"></textarea>
+            <textarea th:field="*{news.text}" id="text" name="text" placeholder="Text..." style="height:200px"></textarea>
+            <p style="color: white; background-color: red" th:text="${textError}" th:if="${textError}"></p>
         </div>
         <div class="col-75">
             <input type="file" name="pictures" multiple placeholder="Text..." style="height:200px">

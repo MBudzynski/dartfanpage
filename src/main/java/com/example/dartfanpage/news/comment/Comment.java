@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Entity
@@ -21,6 +23,8 @@ public class Comment {
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime dataTime;
     @Lob
+    @NotBlank(message = "Content of the comment is required")
+    @NotNull(message = "Text of comment is required")
     private String text;
     @ManyToOne
     @JoinColumn(name = "news_id")
