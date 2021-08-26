@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link th:href="@{/css/navigation.css}" rel="stylesheet" />
+    <title>Dart Polska</title>
+</head>
+<body>
+<header>
+    <img th:src="@{/images/darts-arrows.jpg}" alt="Dart board with arrows" width="1300" height="400"/>
+    <div class="w3-display-middle w3-padding-large w3-border w3-wide w3-text-light-grey w3-center">
+        <h1 class="w3-hide-top w3-hide-small w3-xxxlarge">Dart Polska</h1>
+    </div>
+    <div th:replace="/fragments/navigation :: headerNavigation"></div>
+</header>
+
+<h4>Strona powstała w celu propagowania kultury fizycznej w szczegółlności Darta wśród dzieci, młodzieży i seniorów
+jako aktywna forma spedzenia wolnego czasu, zarówno samemu jak i w toważystwie znajomych</h4>
+
+
+<!--<div th:if=" ${not #lists.isEmpty(filesToDownload)}">-->
+    <h4>Pliki do pobrania</h4>
+    <div th:each="file, iterStat : ${files}">
+        <div>
+            <h5> <span th:text="${file.description}"></span> </h5> <a th:href="@{/todownload/{fil}(fil=${file.fileName})}" download>Download</a>
+        </div>
+    </div>
+<!--</div>-->
+
+<form method="post" th:action="@{/addFileToDownload}" enctype="multipart/form-data">
+    <textarea name="description" placeholder="Description..." style="height:200px"></textarea>
+    <input type="file" name="fileToDownload"  style="height:200px">
+    <button class="button button2" >Dodaj</button>
+</form>
+
+<footer>
+    <p>Wszystkie prawa zastrzeżone©. Strona zrobiona przez Michała Budzyńskiego</p>
+</footer>
+</body>
+</html>

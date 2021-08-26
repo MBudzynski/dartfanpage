@@ -24,6 +24,7 @@ public class NewsDto {
     private String text;
     private List<PictureDto> pictures;
     private List<CommentDto> comments;
+
     @Builder(toBuilder = true)
     public NewsDto(Long id, String author, LocalDate publicationDate, String mainPicture,
                    String title, String headline, String text, List<PictureDto> pictures, List<CommentDto> comments) {
@@ -67,10 +68,6 @@ public class NewsDto {
                 .pictures(PictureDto.toDto(news.getPictures()))
                 .comments(CommentDto.toDto(news.getComments()))
                 .build();
-    }
-
-    public void addCommentToList(CommentDto commentDto){
-        this.comments.add(commentDto);
     }
 
 }
