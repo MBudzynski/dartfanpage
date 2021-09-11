@@ -3,56 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link th:href="@{/css/navigation.css}" rel="stylesheet" />
+    <link th:href="@{/css/navigation.css}" rel="stylesheet"/>
+    <link th:href="@{/css/main.css}" rel="stylesheet"/>
+    <link th:href="@{/css/button.css}" rel="stylesheet"/>
+    <link th:href="@{../css/forms.css}" rel="stylesheet"/>
+    <link th:href="@{../css/button.css}" rel="stylesheet"/>
     <title>Dart Polska</title>
-    <style>
-
-    </style>
 </head>
 <body>
-<header>
-    <img th:src="@{/images/darts-arrows.jpg}" alt="Dart board with arrows" width="1300" height="400"/>
-    <div class="w3-display-middle w3-padding-large w3-border w3-wide w3-text-light-grey w3-center">
-        <h1 class="w3-hide-top w3-hide-small w3-xxxlarge">Dart Polska</h1>
-    </div>
-    <div th:replace="/fragments/navigation :: headerNavigation"></div>
-</header>
 
-<div class="from">
-    <form method="post" th:action="@{/addArticle}" enctype="multipart/form-data" >
-
-
-        <div class="col-75">
-            <textarea th:field="*{news.author}" id="author" name="author" placeholder="Author..." style="height:200px"></textarea>
-            <p style="color: white; background-color: red" th:text="${authorError}" th:if="${authorError}"></p>
-        </div>
-        <div class="col-75">
-            <input type="file" name="mainPicture">
-        </div>
-        <div class="col-75">
-            <textarea th:field="*{news.title}" id="title" name="title" placeholder="Title..." style="height:200px"></textarea>
-            <p style="color: white; background-color: red" th:text="${titleError}" th:if="${titleError}"></p>
-        </div>
-        <div class="col-75">
-            <textarea th:field="*{news.headline}" id="headline" name="headline" placeholder="Head line..." style="height:200px"></textarea>
-            <p style="color: white; background-color: red" th:text="${headlineError}" th:if="${headlineError}"></p>
-        </div>
-        <div class="col-75">
-            <textarea th:field="*{news.text}" id="text" name="text" placeholder="Text..." style="height:200px"></textarea>
-            <p style="color: white; background-color: red" th:text="${textError}" th:if="${textError}"></p>
-        </div>
-        <div class="col-75">
-            <input type="file" name="pictures" multiple placeholder="Text..." style="height:200px">
-        </div>
-
-
-        <button class="button button2" >Opublikuj</button>
-    </form>
+<div class="header">
+        <p>Dart Polska</p>
 </div>
 
+<div class="nav" th:replace="/fragments/navigation :: headerNavigation"></div>
 
-<footer>
-    <p>Wszystkie prawa zastrzeżone©. Strona zrobiona przez Michała Budzyńskiego</p>
-</footer>
+<div id="page-conteiner">
+    <div class="row" >
+        <div class="column side">
+            <h4>Logowanie</h4>
+        </div>
+
+        <div class="column middle" >
+
+            <div>
+                <form method="post" th:action="@{/addArticle}" enctype="multipart/form-data" >
+
+
+                    <div class="article">
+                        <label>Autor</label>
+                        <input th:field="*{news.author}" id="author" name="author" placeholder="Author..." >
+                        <p style="color: white; background-color: red" th:text="${authorError}" th:if="${authorError}"></p>
+                    </div>
+                    <div class="article">
+                        <label>Zdjęcie główne</label>
+                        <input type="file" name="mainPicture">
+                    </div>
+                    <div class="article">
+                        <label>Tytuł</label>
+                        <textarea th:field="*{news.title}" id="articleTheme" name="title" placeholder="articleTheme..." ></textarea>
+                        <p style="color: white; background-color: red" th:text="${titleError}" th:if="${titleError}"></p>
+                    </div>
+                    <div class="article">
+                        <label>Nagłówek</label>
+                        <textarea th:field="*{news.headline}" id="headline" name="headline" placeholder="Head line..." ></textarea>
+                        <p style="color: white; background-color: red" th:text="${headlineError}" th:if="${headlineError}"></p>
+                    </div>
+                    <div class="article">
+                        <label>Treść</label>
+                        <textarea th:field="*{news.text}" id="text" name="text" placeholder="Text..."></textarea>
+                        <p style="color: white; background-color: red" th:text="${textError}" th:if="${textError}"></p>
+                    </div>
+                    <div class="article">
+                        <label>Galeria</label>
+                        <input type="file" name="pictures" multiple placeholder="Text..." >
+                    </div>
+
+
+                    <button class="button button2" >Opublikuj</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>Wszystkie prawa zastrzeżone©. Strona zrobiona przez Michała Budzyńskiego</p>
+    </div>
+</div>
+
 </body>
 </html>

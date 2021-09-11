@@ -3,45 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link th:href="@{/css/navigation.css}" rel="stylesheet" />
-    <link th:href="@{/css/gallery.css}" rel="stylesheet" />
-    <link th:href="@{/css/button.css}" rel="stylesheet" />
-    <link th:href="@{/css/forms.css}" rel="stylesheet" />
+    <link th:href="@{/css/navigation.css}" rel="stylesheet"/>
+    <link th:href="@{/css/main.css}" rel="stylesheet"/>
+    <link th:href="@{../css/gallery.css}" rel="stylesheet"/>
+    <link th:href="@{../css/button.css}" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" th:href="@{../lightbox/css/lightbox.min.css}">
+    <script th:src="@{../lightbox/js/lightbox-plus-jquery.min.js}"></script>
     <title>Dart Polska</title>
 </head>
 <body>
 
-<header>
-    <img th:src="@{/images/darts-arrows.jpg}" alt="Dart board with arrows" width="1300" height="400">
-    <div class="w3-display-middle w3-padding-large w3-border w3-wide w3-text-light-grey w3-center">
-        <h1 class="w3-hide-top w3-hide-small w3-xxxlarge">Dart Polska</h1>
-    </div>
-    <div th:replace="/fragments/navigation :: headerNavigation"></div>
-</header>
-
-<div class="form">
-<form style="margin: 10px" method="post" enctype="multipart/form-data" th:action="@{/uploadImage}">
-    <input type="file" name="imageFile">
-    <p th:text="${imageFileError}" th:if="${imageFileError}"></p>
-    <button class="button" >Dodaj</button>
-</form>
+<div class="header">
+    <p>Dart Polska</p>
 </div>
 
-<div>
-    <div th:each="image, iterStat : ${galleryList}">
-        <div class="responsive">
-            <div class="gallery">
-                <a target="_blank" th:href="@{/gallery/{img}(img=${image})}">
-                    <img th:src="@{${'/gallery/' + image}}" width="600" height="400" >
-                </a>
+<div class="nav" th:replace="/fragments/navigation :: headerNavigation"></div>
+
+<div id="page-conteiner">
+    <div class="row" >
+        <div class="column side">
+            <h4>Logowanie</h4>
+        </div>
+
+        <div class="column middle" >
+            <div class="form">
+                <form style="margin: 10px" method="post" enctype="multipart/form-data" th:action="@{/uploadImage}">
+                    <input type="file" name="imageFile">
+                    <button class="button button2">Dodaj</button>
+                </form>
             </div>
+
+
+            <div class="gallery">
+                <div>
+                    <a th:each="image, iterStat : ${galleryList}" th:href="@{/gallery/{img}(img=${image})}" data-lightbox="mygallery"><img th:src="@{${'/gallery/' + image}}"/></a>
+                </div>
+            </div>
+
         </div>
     </div>
-</div>
 
-<footer style="padding: 20px; text-align: center; background-color: lightgray">
-    <p>Wszystkie prawa zastrzeżone©. Strona zrobiona przez Michała Budzyńskiego</p>
-</footer>
+    <div class="footer">
+        <p>Wszystkie prawa zastrzeżone©. Strona zrobiona przez Michała Budzyńskiego</p>
+    </div>
+</div>
 
 </body>
 </html>

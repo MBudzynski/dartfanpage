@@ -30,7 +30,7 @@ public class NewsService {
         newsDto.setPictures(multipartFileConverter(pictures));
 
         saveImageOnDirectory(mainPicture);
-        if(pictures == null){
+        if(pictures.length > 0){
             Arrays.stream(pictures).forEach(picture-> saveImageOnDirectory(picture));
         }
 

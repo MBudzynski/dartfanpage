@@ -3,72 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link th:href="@{/css/navigation.css}" rel="stylesheet" />
+    <link th:href="@{/css/navigation.css}" rel="stylesheet"/>
+    <link th:href="@{/css/main.css}" rel="stylesheet"/>
+    <link th:href="@{/css/button.css}" rel="stylesheet"/>
     <link th:href="@{/css/table.css}" rel="stylesheet" />
-    <link th:href="@{/css/button.css}" rel="stylesheet" />
     <title>Dart Polska</title>
 </head>
 <body>
-<header>
-    <img th:src="@{/images/darts-arrows.jpg}" alt="Dart board with arrows" width="1300" height="400">
-    <div class="w3-display-middle w3-padding-large w3-border w3-wide w3-text-light-grey w3-center">
-        <h1 class="w3-hide-top w3-hide-small w3-xxxlarge">Dart Polska</h1>
-    </div>
-    <div th:replace="/fragments/navigation :: headerNavigation"></div>
-</header>
 
-<a th:href="@{/addEditTournament}">
-<button class="button button2" type="button">Dodaj nowy turniej</button>
-</a>
+<div class="header">
+    <p>Dart Polska</p>
+</div>
 
+<div class="nav" th:replace="/fragments/navigation :: headerNavigation"></div>
 
-<h4 th:if=" ${ #lists.isEmpty(tournaments) }">Brak turniejów w najbliższym czsie :(</h4>
+<div id="page-conteiner">
+    <div class="row" >
+        <div class="column side">
+            <h4>Logowanie</h4>
+        </div>
 
-<table id="tournaments" th:if="${tournaments.size() > 0}">
-    <thead>
-    <tr>
-        <th><h5>Turnieje</h5></th>
-        <th><h5>Adres</h5></th>
-        <th><h5>Data</h5></th>
-        <th><h5>Wpisowe</h5></th>
-        <th>Action</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="tournament, iterStat : ${tournaments}" >
-        <td>
-            <h5><span th:text="${tournament.placeName}"/></h5>
-            <h6><span th:text="${tournament.city}"/></h6>
-        </td>
-        <td>
-            <h6><span th:text="${tournament.street}"/>
-                <span th:text="${tournament.venueNumber}"/></h6>
-            <h6><span th:text="${tournament.zipCode}"/>
-                <span th:text="${tournament.postOffice}"/></h6>
-        </td>
-        <td>
-            <h6><span th:text="${tournament.data}"/></h6>
-            <h6><span th:text="${tournament.startAt}"/></h6>
-        </td>
-        <td>
-            <h6><span th:text="${tournament.entryFee}"/></h6>
-        </td>
-        <td>
-            <a th:href="@{/tournaments/{id}(id=${tournament.id})}">
-                <button class="button4" type="button">Edytuj</button>
-            </a></br>
-            </br>
-            <a th:href="@{/tournamentDelete/{id}(id=${tournament.id})}">
-                <button class="button3"  type="button">Usuń</button>
+        <div class="column middle" >
+            <a th:href="@{/addEditTournament}">
+                <button class="button button2" type="button">Dodaj nowy turniej</button>
             </a>
-        </td>
-    </tr>
-    </tbody>
-</table>
 
-<footer>
-    <p>Wszystkie prawa zastrzeżone©. Strona zrobiona przez Michała Budzyńskiego</p>
-</footer>
+
+            <h4 th:if=" ${ #lists.isEmpty(tournaments) }">Brak turniejów w najbliższym czsie :(</h4>
+
+            <table id="tournaments" th:if="${tournaments.size() > 0}">
+                <thead>
+                <tr>
+                    <th><h5>Turnieje</h5></th>
+                    <th><h5>Adres</h5></th>
+                    <th><h5>Data</h5></th>
+                    <th><h5>Wpisowe</h5></th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="tournament, iterStat : ${tournaments}" >
+                    <td>
+                        <h5><span th:text="${tournament.placeName}"/></h5>
+                        <h6><span th:text="${tournament.city}"/></h6>
+                    </td>
+                    <td>
+                        <h6><span th:text="${tournament.street}"/>
+                            <span th:text="${tournament.venueNumber}"/></h6>
+                        <h6><span th:text="${tournament.zipCode}"/>
+                            <span th:text="${tournament.postOffice}"/></h6>
+                    </td>
+                    <td>
+                        <h6><span th:text="${tournament.data}"/></h6>
+                        <h6><span th:text="${tournament.startAt}"/></h6>
+                    </td>
+                    <td>
+                        <h6><span th:text="${tournament.entryFee}"/></h6>
+                    </td>
+                    <td>
+                        <a th:href="@{/tournaments/{id}(id=${tournament.id})}">
+                            <button class="button4" type="button">Edytuj</button>
+                        </a></br>
+                        </br>
+                        <a th:href="@{/tournamentDelete/{id}(id=${tournament.id})}">
+                            <button class="button3"  type="button">Usuń</button>
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>Wszystkie prawa zastrzeżone©. Strona zrobiona przez Michała Budzyńskiego</p>
+    </div>
+</div>
 
 </body>
 </html>

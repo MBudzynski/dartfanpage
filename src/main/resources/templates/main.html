@@ -3,42 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link th:href="@{/css/navigation.css}" rel="stylesheet" />
+    <link th:href="@{/css/navigation.css}" rel="stylesheet"/>
+    <link th:href="@{/css/main.css}" rel="stylesheet"/>
+    <link th:href="@{/css/button.css}" rel="stylesheet"/>
     <title>Dart Polska</title>
 </head>
 <body>
-<header>
-    <img th:src="@{/images/darts-arrows.jpg}" alt="Dart board with arrows" width="1300" height="400"/>
-    <div class="w3-display-middle w3-padding-large w3-border w3-wide w3-text-light-grey w3-center">
-        <h1 class="w3-hide-top w3-hide-small w3-xxxlarge">Dart Polska</h1>
+
+<div class="header">
+        <p>Dart Polska</p>
+</div>
+
+<div class="nav" th:replace="/fragments/navigation :: headerNavigation"></div>
+
+<div id="page-conteiner">
+    <div class="row" >
+        <div class="column side">
+            <h4>Logowanie</h4>
+        </div>
+
+        <div class="column middle" >
+            <a th:href="@{/addArticle}">
+                <button class="button button2" type="button">Dodaj nowy artykuł</button>
+            </a>
+            <h4 th:if=" ${ #lists.isEmpty(news) }">Brak wiadomości</h4>
+
+            <div  th:each="news, iterStat : ${news}">
+                <div id="news">
+                    <h5><span th:text="${news.publicationDate}"/></h5>
+                    <div><img style="height: 350px; width: 650px;" th:src="@{/images/} + ${news.mainPicture}"></div>
+                    <h2><span th:text="${news.title}"/></h2>
+                    <div>
+                        <div id="read-more">
+                            <a style="float: right; margin-right: 30px; font-size: 20px" th:href="@{/news/{id}(id=${news.id})}">Czytaj więcej</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div th:replace="/fragments/navigation :: headerNavigation"></div>
-</header>
-<a th:href="@{/addArticle}">
-    <button class="button button2" type="button">Dodaj nowy artykuł</button>
-</a>
-<h4 th:if=" ${ #lists.isEmpty(news) }">Brak wiadomości</h4>
 
-<table th:if="${news.size() > 0}">
-    <thead>
-    <tr>
-        <th><h5>News</h5></th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="news, iterStat : ${news}" >
-        <td>
-            <h6><span th:text="${news.author}"/> <span th:text="${news.publicationDate}"/></h6>
-            <img th:src="@{/images/} + ${news.mainPicture}" width="300" height="150">
-            <h5><span th:text="${news.title}"/><a style="float:right" th:href="@{/news/{id}(id=${news.id})}">Czytaj więcej</a></h5>
-        </td>
-    </tr>
-    </tbody>
-</table>
+    <div class="footer">
+        <p>Wszystkie prawa zastrzeżone©. Strona zrobiona przez Michała Budzyńskiego</p>
+    </div>
+</div>
 
-
-<footer>
-    <p>Wszystkie prawa zastrzeżone©. Strona zrobiona przez Michała Budzyńskiego</p>
-</footer>
 </body>
 </html>

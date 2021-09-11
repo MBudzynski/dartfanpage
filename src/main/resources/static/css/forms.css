@@ -28,3 +28,10 @@ input[type=submit]:hover {
     background-color: #f2f2f2;
     padding: 20px;
 }
+
+.article textarea{
+    height: 300px;
+    width: 1000px;
+    padding: 20px;
+    margin: 20px;
+}
