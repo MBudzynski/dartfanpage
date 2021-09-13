@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link th:href="@{/css/navigation.css}" rel="stylesheet"/>
+    <link th:href="@{/css/main.css}" rel="stylesheet"/>
+    <link th:href="@{/css/button.css}" rel="stylesheet"/>
+    <link th:href="@{/css/forms.css}" rel="stylesheet"/>
+    <title>Dart Polska</title>
+</head>
+<body>
+
+<div class="header">
+    <p>Dart Polska</p>
+</div>
+
+<div class="nav" th:replace="/fragments/navigation :: headerNavigation"></div>
+
+<div id="page-conteiner">
+    <div class="row">
+        <div class="column side">
+            <h4>Logowanie</h4>
+        </div>
+
+        <div class="column middle">
+
+            <div class="form">
+                <form method="post" th:action="@{register}" th:object="${registrationUserDto}">
+
+                    <label>First name</label>
+                    <input th:field="*{firstName}" type="text" name="firstName" placeholder="firstName">
+                    <p class="error" th:text="${firstNameError}" th:if="${firstNameError}"></p>
+
+                    <label>Last name</label>
+                    <input th:field="*{lastName}" type="text" name="lastName" placeholder="lastName">
+                    <p class="error" th:text="${lastNameError}" th:if="${lastNameError}"></p>
+
+                    <label>e-mail</label>
+                    <input th:field="*{eMail}" type="text" name="eMail" placeholder="eMail">
+                    <p class="error" th:text="${eMailError}" th:if="${eMailError}"></p>
+                    <p class="error" th:if="${userFoundMessage}" th:text="${userFoundMessage}"></p>
+
+                    <label>Password</label>
+                    <input th:field="*{password}" type="text" name="password" placeholder="password">
+                    <p class="error" th:text="${passwordError}" th:if="${passwordError}"></p>
+
+                    <label>City</label>
+                    <input th:field="*{city}" type="text" name="city" placeholder="city">
+                    <p class="error" th:text="${cityError}" th:if="${cityError}"></p>
+
+                    <label>Zip code</label>
+                    <input th:field="*{zipCode}" type="text" name="zipCode" placeholder="zipCode">
+                    <p class="error" th:text="${zipCodeError}" th:if="${zipCodeError}"></p>
+
+                    <label>Street</label>
+                    <input th:field="*{street}" type="text" name="street" placeholder="street">
+                    <p class="error" th:text="${streetError}" th:if="${streetError}"></p>
+
+                    <label>Birth date</label>
+                    <input th:field="*{birthDate}" type="text" name="birthDate" placeholder="birthDate">
+                    <p class="error" th:text="${birthDateError}" th:if="${birthDateError}"></p>
+
+                    <label>Phone</label>
+                    <input th:field="*{phone}" type="text" name="phone" placeholder="phone">
+                    <p class="error" th:text="${phoneError}" th:if="${phoneError}"></p>
+
+                    <button class="button button2">Utwórz konto</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>Wszystkie prawa zastrzeżone©. Strona zrobiona przez Michała Budzyńskiego</p>
+    </div>
+</div>
+
+</body>
+</html>

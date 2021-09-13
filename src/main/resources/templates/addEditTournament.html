@@ -24,7 +24,8 @@
         </div>
 
         <div class="column middle" >
-            <div class="from">
+
+            <div class="form">
                 <form method="post" th:action="@{/tournaments}" th:object="${tournament}">
                     <input type="hidden"  th:field="*{id}"/>
                     <label>Nazwa miejsca</label>
@@ -52,7 +53,6 @@
                     <input th:field="*{postOffice}" type="text" name="postOffice" placeholder="Np.:Lublin">
                     <p th:text="${postOfficeError}" th:if="${postOfficeError}"></p>
 
-
                     <label>Data turnieju</label>
                     <input type="date" th:value="*{data}" name="data" >
                     <p class="error" th:text="${dateError}" th:if="${dateError}"></p>
@@ -69,6 +69,7 @@
                     <button class="button button2" >Zapisz</button>
                 </form>
             </div>
+
         </div>
     </div>
 
