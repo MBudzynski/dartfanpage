@@ -27,10 +27,10 @@ public class NewsService {
 
     public String saveNews(NewsDto newsDto ,MultipartFile mainPicture, MultipartFile[] pictures) {
 
-        newsDto.setPictures(multipartFileConverter(pictures));
 
         saveImageOnDirectory(mainPicture);
-        if(pictures.length > 0){
+        if(!pictures[0].isEmpty()){
+            newsDto.setPictures(multipartFileConverter(pictures));
             Arrays.stream(pictures).forEach(picture-> saveImageOnDirectory(picture));
         }
 

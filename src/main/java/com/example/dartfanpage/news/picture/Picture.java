@@ -1,5 +1,6 @@
 package com.example.dartfanpage.news.picture;
 
+import com.example.dartfanpage.BaseEntity;
 import com.example.dartfanpage.news.News;
 import lombok.Builder;
 import lombok.Getter;
@@ -11,11 +12,8 @@ import javax.persistence.*;
 @Entity
 @NoArgsConstructor
 @Getter
-public class Picture {
+public class Picture extends BaseEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
     private String pictureName;
 
     @ManyToOne
@@ -24,7 +22,7 @@ public class Picture {
 
     @Builder(toBuilder = true)
     public Picture(Long id, String pictureName, News news) {
-        this.id = id;
+        super(id);
         this.pictureName = pictureName;
         this.news = news;
     }

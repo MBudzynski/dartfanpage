@@ -3,6 +3,7 @@ package com.example.dartfanpage.tournament;
 
 
 
+import com.example.dartfanpage.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,13 +19,9 @@ import java.time.LocalTime;
 
 @Entity
 @Getter
-@AllArgsConstructor
 @NoArgsConstructor
-public class Tournament {
+public class Tournament extends BaseEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
     private String placeName;
     private String city;
@@ -33,6 +30,19 @@ public class Tournament {
     private String zipCode;
     private String postOffice;
 
+    public Tournament(Long id, String placeName, String city, String street, String venueNumber, String zipCode, String postOffice, LocalDate data, LocalTime startAt, BigDecimal entryFee) {
+        super(id);
+        this.placeName = placeName;
+        this.city = city;
+        this.street = street;
+        this.venueNumber = venueNumber;
+        this.zipCode = zipCode;
+        this.postOffice = postOffice;
+        this.data = data;
+        this.startAt = startAt;
+        this.entryFee = entryFee;
+    }
+
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate data;
     private LocalTime startAt;
@@ -40,7 +50,7 @@ public class Tournament {
 
     public TournamentDto toDto() {
         return new TournamentDto(
-                this.id,
+                getId(),
                 this.placeName,
                 this.city,
                 this.street,

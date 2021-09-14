@@ -6,6 +6,7 @@
     <link th:href="@{/css/navigation.css}" rel="stylesheet"/>
     <link th:href="@{/css/main.css}" rel="stylesheet"/>
     <link th:href="@{/css/button.css}" rel="stylesheet"/>
+    <link th:href="@{/css/forms.css}" rel="stylesheet"/>
     <title>Dart Polska</title>
 </head>
 <body>
@@ -19,15 +20,8 @@
 <div id="page-conteiner">
     <div class="row" >
         <div class="column side">
-            <h4>Logowanie</h4>
 
-            <a th:href="@{/login}">
-                <button class="button button2" type="button">Zaloguj się</button>
-            </a>
-
-            <a th:href="@{/register}">
-                <button class="button button2" type="button">Załóż konto</button>
-            </a>
+            <div th:replace="/fragments/login :: login"></div>
 
         </div>
 

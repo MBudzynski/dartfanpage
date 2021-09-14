@@ -1,5 +1,6 @@
 package com.example.dartfanpage.downloadFiles;
 
+import com.example.dartfanpage.BaseEntity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,16 +13,14 @@ import javax.persistence.Id;
 @Entity
 @Getter
 @NoArgsConstructor
-public class FileToDownload {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class FileToDownload extends BaseEntity {
+
     private String fileName;
     private String description;
 
     @Builder(toBuilder = true)
     public FileToDownload(Long id, String fileName, String description) {
-        this.id = id;
+        super(id);
         this.fileName = fileName;
         this.description = description;
     }

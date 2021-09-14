@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Dart Polska</title>
+    <link th:href="@{/css/forms.css}" rel="stylesheet"/>
+    <link th:href="@{/css/button.css}" rel="stylesheet"/>
+</head>
+<body>
+<div th:fragment="login">
+    <div class="form">
+        <form method="post" th:action="@{/login-process}">
+            <h6>Nazwa użytkownika</h6>
+            <input name="username" type="email" placeholder="Username"><br/>
+            <h6>Hasło</h6>
+            <input name="password" type="password" placeholder="Password"><br/>
+
+            <button class="button button2" type="button">Zaloguj się</button>
+        </form>
+    </div>
+
+    <a th:href="@{/register}">
+        <button class="button button2" type="button">Załóż konto</button>
+    </a>
+</div>
+
+
+</body>
+</html>

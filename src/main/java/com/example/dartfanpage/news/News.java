@@ -1,5 +1,6 @@
 package com.example.dartfanpage.news;
 
+import com.example.dartfanpage.BaseEntity;
 import com.example.dartfanpage.news.comment.Comment;
 import com.example.dartfanpage.news.picture.Picture;
 import lombok.Builder;
@@ -16,11 +17,8 @@ import java.util.stream.Collectors;
 @Entity
 @Getter
 @NoArgsConstructor
-public class News {
+public class News extends BaseEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
     private String author;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate publicationDate;
@@ -52,7 +50,7 @@ public class News {
                 String text,
                 List<Picture> pictures,
                 List<Comment> comments) {
-        this.id = id;
+        super(id);
         this.author = author;
         this.publicationDate = publicationDate;
         this.mainPicture = mainPicture;

@@ -6,6 +6,7 @@
     <link th:href="@{/css/navigation.css}" rel="stylesheet"/>
     <link th:href="@{/css/main.css}" rel="stylesheet"/>
     <link th:href="@{../css/gallery.css}" rel="stylesheet"/>
+    <link th:href="@{/css/forms.css}" rel="stylesheet"/>
     <link th:href="@{../css/button.css}" rel="stylesheet"/>
     <link rel="stylesheet" type="text/css" th:href="@{../lightbox/css/lightbox.min.css}">
     <script th:src="@{../lightbox/js/lightbox-plus-jquery.min.js}"></script>
@@ -22,7 +23,7 @@
 <div id="page-conteiner">
     <div class="row" >
         <div class="column side">
-            <h4>Logowanie</h4>
+            <div th:replace="/fragments/login :: login"></div>
         </div>
 
         <div class="column middle" >
