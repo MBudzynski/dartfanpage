@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+
 public class User extends BaseEntity {
 
 
@@ -26,6 +27,8 @@ public class User extends BaseEntity {
 
     public User() {
     }
+
+
 
     public User(String firstName, String lastName, String eMail, String passwordHash, String city, String zipCode, String street, String birthDate, String phone) {
         this.firstName = firstName;

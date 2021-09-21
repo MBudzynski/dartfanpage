@@ -25,7 +25,7 @@
 
         <div class="column middle" >
 
-            <div class="form">
+            <div sec:authorize="hasRole('ROLE_ADMIN')" class="form">
                 <form method="post" th:action="@{/tournaments}" th:object="${tournament}">
                     <input type="hidden"  th:field="*{id}"/>
                     <label>Nazwa miejsca</label>

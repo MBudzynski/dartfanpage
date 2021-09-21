@@ -26,7 +26,7 @@
 
         <div class="column middle" >
 
-            <div>
+            <div sec:authorize="hasRole('ROLE_ADMIN')">
                 <form method="post" th:action="@{/addArticle}" enctype="multipart/form-data" >
 
 

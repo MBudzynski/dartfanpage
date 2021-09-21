@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class AuthenticationController {
 
     @GetMapping("/login")
-    public String displayLoginPage(@RequestParam String activePage) {
-        return activePage;
+    public String displayLoginPage() {
+        return "contact.html";
     }
 
 }

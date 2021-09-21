@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pl" xmlns:th="thymeleaf.org">
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Dart Polska</title>
@@ -11,11 +11,11 @@
     <div class="form">
         <form method="post" th:action="@{/login-process}">
             <h6>Nazwa użytkownika</h6>
-            <input name="username" type="email" placeholder="Username"><br/>
+            <input name="username" placeholder="Username"><br/>
             <h6>Hasło</h6>
             <input name="password" type="password" placeholder="Password"><br/>
 
-            <button class="button button2" type="button">Zaloguj się</button>
+            <button class="button button2">Zaloguj się</button>
         </form>
     </div>
 

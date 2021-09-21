@@ -53,9 +53,9 @@
                 </div>
             </div>
 
+            <p th:if="!isAuthenticated()">Komentarze mogą dodawać osoby zalogowane</p>
 
-
-            <form method="post" th:action="@{/addComment}">
+            <form sec:authorize="isAuthenticated()" method="post" th:action="@{/addComment}">
                 <input type="hidden"  name="id" th:value="${news.id}">
                 <input name="author" type="text">
                 <textarea name="text" th:text="${text}" placeholder="Text..." ></textarea>

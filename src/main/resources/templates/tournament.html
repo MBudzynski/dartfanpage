@@ -25,7 +25,8 @@
         </div>
 
         <div class="column middle" >
-            <a th:href="@{/addEditTournament}">
+
+            <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/addEditTournament}">
                 <button class="button button2" type="button">Dodaj nowy turniej</button>
             </a>
 
@@ -61,7 +62,7 @@
                     <td>
                         <h6><span th:text="${tournament.entryFee}"/></h6>
                     </td>
-                    <td>
+                    <td sec:authorize="hasRole('ROLE_ADMIN')">
                         <a th:href="@{/tournaments/{id}(id=${tournament.id})}">
                             <button class="button4" type="button">Edytuj</button>
                         </a></br>

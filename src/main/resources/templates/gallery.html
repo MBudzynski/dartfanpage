@@ -27,7 +27,7 @@
         </div>
 
         <div class="column middle" >
-            <div class="form">
+            <div sec:authorize="hasRole('ROLE_ADMIN')" class="form">
                 <form style="margin: 10px" method="post" enctype="multipart/form-data" th:action="@{/uploadImage}">
                     <input type="file" name="imageFile">
                     <button class="button button2">Dodaj</button>

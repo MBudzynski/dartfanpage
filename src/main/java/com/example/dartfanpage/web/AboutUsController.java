@@ -3,6 +3,7 @@ package com.example.dartfanpage.web;
 import com.example.dartfanpage.downloadFiles.FileToDownloadDto;
 import com.example.dartfanpage.downloadFiles.FileToDownloadService;
 import lombok.AllArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,6 +29,7 @@ public class AboutUsController {
     }
 
     @PostMapping("/addFileToDownload")
+    @PreAuthorize("hasRole('ADMIN')")
     String addFileToDownload(@RequestParam("fileToDownload") MultipartFile imageFile , @RequestParam String description){
 
         FileToDownloadDto fileToDownloadDto = FileToDownloadDto.builder()

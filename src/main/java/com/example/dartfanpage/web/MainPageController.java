@@ -7,6 +7,7 @@ import com.example.dartfanpage.news.comment.CommentDto;
 import com.example.dartfanpage.news.comment.CommentValidator;
 import com.example.dartfanpage.tournament.TournamentDto;
 import lombok.AllArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -35,6 +36,7 @@ public class MainPageController {
     }
 
     @GetMapping("/addArticle")
+    @PreAuthorize("hasRole('ADMIN')")
     String displayAddArticlePage(Model model) {
         NewsDto newsDto = new NewsDto();
         model.addAttribute("activePage", "main");
@@ -43,6 +45,7 @@ public class MainPageController {
     }
 
     @PostMapping("/addArticle")
+    @PreAuthorize("hasRole('ADMIN')")
     public String addNews(@RequestParam String author,
                           @RequestParam("mainPicture") MultipartFile mainPicture,
                           @RequestParam String title,
@@ -87,6 +90,7 @@ public class MainPageController {
     }
 
     @PostMapping("/addComment")
+    @PreAuthorize("isAuthenticated()")
     String addComment(@RequestParam Long id,@RequestParam String author,
                       @RequestParam String text, Model model){
         Map<String, String> commentError = commentValidator.isValid(text);

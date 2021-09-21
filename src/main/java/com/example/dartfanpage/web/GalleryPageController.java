@@ -3,6 +3,7 @@ package com.example.dartfanpage.web;
 import com.example.dartfanpage.gallery.GalleryService;
 import com.example.dartfanpage.gallery.GalleryValidator;
 import lombok.AllArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,6 +29,7 @@ public class GalleryPageController {
     }
 
     @PostMapping("/uploadImage")
+    @PreAuthorize("hasRole('ADMIN')")
     public String uploadImage(@RequestParam("imageFile") MultipartFile imageFile, Model model){
         Map<String, String> errorMap = galleryValidator.isValid(imageFile);
         if (errorMap.isEmpty()) {

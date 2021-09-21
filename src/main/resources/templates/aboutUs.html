@@ -25,7 +25,7 @@
 
         <div class="column middle" >
 
-            <form style="padding: 20px"  method="post" th:action="@{/addFileToDownload}" enctype="multipart/form-data">
+            <form sec:authorize="hasRole('ROLE_ADMIN')" style="padding: 20px"  method="post" th:action="@{/addFileToDownload}" enctype="multipart/form-data">
                 <input name="description" placeholder="Description..." style="width: 350px">
                 <input type="file" name="fileToDownload">
                 <button class="button button2" >Dodaj</button>

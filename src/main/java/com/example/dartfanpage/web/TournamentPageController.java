@@ -5,6 +5,7 @@ import com.example.dartfanpage.tournament.TournamentService;
 import com.example.dartfanpage.tournament.TournamentValidator;
 import lombok.AllArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -32,6 +33,7 @@ public class TournamentPageController {
     }
 
     @GetMapping("/addEditTournament")
+    @PreAuthorize("hasRole('ADMIN')")
     String displayAddEditTournamentPage(Model model, TournamentDto dto) {
         model.addAttribute("activePage", "tournaments");
         model.addAttribute("tournament", dto);
@@ -39,6 +41,7 @@ public class TournamentPageController {
     }
 
     @PostMapping("/tournaments")
+    @PreAuthorize("hasRole('ADMIN')")
     String addOrEditTournament(@RequestParam(required = false) Long id,
                                @RequestParam String placeName,
                                @RequestParam String city,
@@ -73,6 +76,7 @@ public class TournamentPageController {
     }
 
     @GetMapping("/tournaments/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     String editTournament(@PathVariable Long id, Model model) {
         Optional<TournamentDto> tournamentById = tournamentService.findTournamentById(id);
         if (tournamentById.isEmpty()) {
@@ -84,6 +88,7 @@ public class TournamentPageController {
     }
 
     @GetMapping("/tournamentDelete/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     String deleteTournament(@PathVariable Long id) {
         tournamentService.delete(id);
         return "redirect:/tournaments";
