@@ -6,6 +6,7 @@ import com.example.dartfanpage.tournament.TournamentValidator;
 import lombok.AllArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -28,6 +29,7 @@ public class TournamentPageController {
     @GetMapping("/tournaments")
     String tournamentsList(Model model) {
         model.addAttribute("tournaments", tournamentService.getCurrentTournaments());
+        model.addAttribute("userName", SecurityContextHolder.getContext().getAuthentication().getName());
         model.addAttribute("activePage", "tournaments");
         return "tournament.html";
     }
@@ -36,6 +38,7 @@ public class TournamentPageController {
     @PreAuthorize("hasRole('ADMIN')")
     String displayAddEditTournamentPage(Model model, TournamentDto dto) {
         model.addAttribute("activePage", "tournaments");
+        model.addAttribute("userName", SecurityContextHolder.getContext().getAuthentication().getName());
         model.addAttribute("tournament", dto);
         return "addEditTournament.html";
     }
@@ -68,6 +71,7 @@ public class TournamentPageController {
             return "redirect:/tournaments";
         }
         model.addAttribute("activePage", "tournaments");
+        model.addAttribute("userName", SecurityContextHolder.getContext().getAuthentication().getName());
         model.addAttribute("tournament", dto);
         model.addAllAttributes(errorMap);
         return "addEditTournament.html";

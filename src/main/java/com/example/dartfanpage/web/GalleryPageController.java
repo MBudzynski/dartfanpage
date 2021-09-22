@@ -4,6 +4,7 @@ import com.example.dartfanpage.gallery.GalleryService;
 import com.example.dartfanpage.gallery.GalleryValidator;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,6 +25,7 @@ public class GalleryPageController {
     @GetMapping("/gallery")
     public String displayMainPage(Model model){
         model.addAttribute("activePage", "gallery");
+        model.addAttribute("userName", SecurityContextHolder.getContext().getAuthentication().getName());
         model.addAttribute("galleryList", galleryService.getGallery());
         return "gallery.html";
     }
@@ -38,6 +40,7 @@ public class GalleryPageController {
         }
         model.addAttribute("activePage", "gallery");
         model.addAttribute("galleryList", galleryService.getGallery());
+        model.addAttribute("userName", SecurityContextHolder.getContext().getAuthentication().getName());
         model.addAttribute(errorMap);
         return "gallery";
     }

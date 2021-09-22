@@ -7,10 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-
 public class User extends BaseEntity {
 
-
+    private String userName;
     private String firstName;
     private String lastName;
     private String eMail;
@@ -21,7 +20,7 @@ public class User extends BaseEntity {
     private String birthDate;
     private String phone;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_role")
     private List<Role> roles = new ArrayList<>();
 
@@ -30,7 +29,8 @@ public class User extends BaseEntity {
 
 
 
-    public User(String firstName, String lastName, String eMail, String passwordHash, String city, String zipCode, String street, String birthDate, String phone) {
+    public User(String userName, String firstName, String lastName, String eMail, String passwordHash, String city, String zipCode, String street, String birthDate, String phone) {
+        this.userName = userName;
         this.firstName = firstName;
         this.lastName = lastName;
         this.eMail = eMail;
@@ -44,6 +44,7 @@ public class User extends BaseEntity {
 
     public static User fromDto(RegistrationUserDto dto, String passwordHash) {
         return new User(
+                dto.getUserName(),
                 dto.getFirstName(),
                 dto.getLastName(),
                 dto.getEMail(),
@@ -57,6 +58,26 @@ public class User extends BaseEntity {
 
     public String geteMail() {
         return eMail;
+    }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getPasswordHash() {
+        return passwordHash;
+    }
+
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
     }
 
     public void addRole(Role role) {

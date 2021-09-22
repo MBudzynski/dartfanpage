@@ -4,6 +4,7 @@ import com.example.dartfanpage.downloadFiles.FileToDownloadDto;
 import com.example.dartfanpage.downloadFiles.FileToDownloadService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +24,7 @@ public class AboutUsController {
     @GetMapping("/aboutUs")
     String displayAboutUsPage(Model model){
         model.addAttribute("files" , fileToDownloadService.getFileToDownload());
+        model.addAttribute("userName", SecurityContextHolder.getContext().getAuthentication().getName());
         model.addAttribute("activePage", "aboutUs");
 
         return "aboutUs.html";

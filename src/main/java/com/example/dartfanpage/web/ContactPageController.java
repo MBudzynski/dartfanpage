@@ -5,6 +5,7 @@ import com.example.dartfanpage.contact.ContactService;
 import com.example.dartfanpage.contact.Email;
 import com.example.dartfanpage.contact.EmailValidator;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -27,6 +28,7 @@ public class ContactPageController {
     String displayContactPage(Model model){
         model.addAttribute("info", companyInfo);
         model.addAttribute("eMail", new Email());
+        model.addAttribute("userName", SecurityContextHolder.getContext().getAuthentication().getName());
         model.addAttribute("activePage", "contact");
         return "contact.html";
     }
@@ -39,12 +41,14 @@ public class ContactPageController {
             model.addAttribute("info", companyInfo);
             model.addAttribute("activePage", "contact");
             model.addAttribute("eMail", new Email());
+            model.addAttribute("userName", SecurityContextHolder.getContext().getAuthentication().getName());
             model.addAttribute("success", "Wiadomość została wysłana");
             return "contact.html";
         }
         model.addAttribute("info", companyInfo);
         model.addAttribute("activePage", "contact");
         model.addAttribute("eMail", email);
+        model.addAttribute("userName", SecurityContextHolder.getContext().getAuthentication().getName());
         model.addAllAttributes(errors);
         return "contact.html";
     }

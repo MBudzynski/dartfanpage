@@ -8,6 +8,7 @@ import com.example.dartfanpage.news.comment.CommentValidator;
 import com.example.dartfanpage.tournament.TournamentDto;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -31,6 +32,7 @@ public class MainPageController {
     @GetMapping("/")
     public String displayMainPage(Model model){
         model.addAttribute("news", newsService.getAllNews());
+        model.addAttribute("userName", SecurityContextHolder.getContext().getAuthentication().getName());
         model.addAttribute("activePage", "main");
         return "main.html";
     }
@@ -72,6 +74,7 @@ public class MainPageController {
             }
         }
         model.addAttribute("activePage", "main");
+        model.addAttribute("userName", SecurityContextHolder.getContext().getAuthentication().getName());
         model.addAllAttributes(newsError);
         model.addAttribute("news", newsDto);
         return "addArticle.html";
@@ -85,6 +88,7 @@ public class MainPageController {
         }
         model.addAttribute("news", newsById.get());
         model.addAttribute("activePage", "main");
+        model.addAttribute("userName", SecurityContextHolder.getContext().getAuthentication().getName());
         model.addAttribute("text", "");
         return "newsPage.html";
     }
@@ -104,6 +108,7 @@ public class MainPageController {
         }
         model.addAllAttributes(commentError);
         model.addAttribute("news", newsService.findNewsById(id).get());
+        model.addAttribute("userName", SecurityContextHolder.getContext().getAuthentication().getName());
         model.addAttribute("activePage", "main");
         model.addAttribute("text", "");
         return "newsPage.html";

@@ -43,11 +43,11 @@ public class DataSeed implements InitializingBean {
         if (userRepository.count() > 0) {
             return;
         }
-        User user = new User("Adam", "Nowak", "user@user.pl", passwordEncoder.encode("user123"),
+        User user = new User("user","Adam", "Błaszczykiewicz", "user@user.pl", passwordEncoder.encode("user123"),
                 "Lublin", "20-601",
                 "krakowskie", "1233-12-12", "123456");
 
-        User admin = new User("Adam", "Nowak", "admin@admin.pl", passwordEncoder.encode("admin123"),
+        User admin = new User("admin","Adam", "Nowak", "admin@admin.pl", passwordEncoder.encode("admin123"),
                 "Lublin", "20-601",
                 "krakowskie", "1233-12-12", "123456");
 

@@ -53,7 +53,7 @@
                 </div>
             </div>
 
-            <p th:if="!isAuthenticated()">Komentarze mogą dodawać osoby zalogowane</p>
+            <p sec:authorize="!isAuthenticated()">Komentarze mogą dodawać osoby zalogowane</p>
 
             <form sec:authorize="isAuthenticated()" method="post" th:action="@{/addComment}">
                 <input type="hidden"  name="id" th:value="${news.id}">

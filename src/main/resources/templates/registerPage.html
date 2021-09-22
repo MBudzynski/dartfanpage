@@ -20,13 +20,17 @@
 <div id="page-conteiner">
     <div class="row">
         <div class="column side">
-            <h4>Logowanie</h4>
+            <h4> </h4>
         </div>
 
         <div class="column middle">
 
             <div class="form">
                 <form method="post" th:action="@{register}" th:object="${registrationUserDto}">
+
+                    <label>User name</label>
+                    <input th:field="*{userName}" type="text" name="userName" placeholder="userName">
+                    <p class="error" th:text="${userName}" th:if="${userName}"></p>
 
                     <label>First name</label>
                     <input th:field="*{firstName}" type="text" name="firstName" placeholder="firstName">
