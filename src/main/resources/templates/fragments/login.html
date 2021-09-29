@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<html lang="pl" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Dart Polska</title>
@@ -17,6 +17,9 @@
 
             <button class="button button2">Zaloguj się</button>
         </form>
+
+            <a sec:authorize="!isAuthenticated()" th:href="@{/forgetPassword}">Nie pamiętam hasła</a>
+
 
         <div sec:authorize="isAuthenticated()">
             <h4>Witaj: <span th:text="${userName}"></span></h4>

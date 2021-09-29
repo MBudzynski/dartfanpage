@@ -16,4 +16,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Query("SELECT u from User u where u.userName = :text or u.eMail = :text")
     Optional<User> findByUserNameOrEMail(String text);
 
+    @Query("SELECT u from User u inner join PasswordResetToken prt on prt.id = u.passwordResetToken.id where prt.token = :token")
+    User findUserByPasswordResetToken(String token);
+
 }

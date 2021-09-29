@@ -32,8 +32,8 @@ public class EmailSender {
         try {
             Message message = new MimeMessage(session);
             message.setRecipient(Message.RecipientType.TO, new InternetAddress(smtpProperties.getUser()));
-            message.setSubject("Message send from webpage: " + email.getTitle());
-            message.setText("Coresponding address: " + email.getEMailAddress() + "\n" +email.getText());
+            message.setSubject("Wiadomość wysłana ze strony DartPolska: " + email.getTitle());
+            message.setText("Email do korespondencji: " + email.getEMailAddress() + "\n" +email.getText());
             return message;
         } catch (Exception ex) {
             Logger.getLogger(EmailSender.class.getName()).log(Level.SEVERE, null, ex);
@@ -59,5 +59,31 @@ public class EmailSender {
         properties.put("mail.smtp.port", smtpProperties.getPort().toString());
         return properties;
     }
+
+    public void sendPasswordResetTokenEmail(String email, String url) {
+        Message message = constructResetTokenEmail(createSession(), email, url);
+
+        try {
+            Transport.send(message);
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private Message constructResetTokenEmail(Session session, String email, String url) {
+        try {
+            Message message = new MimeMessage(session);
+            message.setRecipient(Message.RecipientType.TO, new InternetAddress(email));
+            message.setSubject("Dart Polska: prośba o zresetowanie hasła.");
+            message.setText("Otrzymaliśmy prośbę o zresetowanie hasła do " +
+                    "twojego konta. W celu zresetowania hasła kliknij w poniższy link. Link jest ważny przez 15 minut. \n\n\n " + url +
+            "\n\n\n Jeśli to nie ty wysałeś żądanie zresetowanie hasła zignoruj tę wiadomośc!!");
+            return message;
+        } catch (Exception ex) {
+            Logger.getLogger(EmailSender.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
 
 }

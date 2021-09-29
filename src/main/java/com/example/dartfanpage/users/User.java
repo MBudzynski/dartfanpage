@@ -1,6 +1,9 @@
 package com.example.dartfanpage.users;
 
 import com.example.dartfanpage.BaseEntity;
+import com.example.dartfanpage.users.resetPassword.PasswordResetToken;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -23,6 +26,10 @@ public class User extends BaseEntity {
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_role")
     private List<Role> roles = new ArrayList<>();
+
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval=true)
+    @JoinColumn(name="passwordResetToken_id", referencedColumnName = "id")
+    private PasswordResetToken passwordResetToken;
 
     public User() {
     }
@@ -84,5 +91,11 @@ public class User extends BaseEntity {
         roles.add(role);
     }
 
+    public PasswordResetToken getPasswordResetToken() {
+        return passwordResetToken;
+    }
 
+    public void setPasswordResetToken(PasswordResetToken passwordResetToken) {
+        this.passwordResetToken = passwordResetToken;
+    }
 }
