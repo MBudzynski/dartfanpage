@@ -6,6 +6,7 @@ import com.example.dartfanpage.news.picture.Picture;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -17,6 +18,7 @@ import java.util.stream.Collectors;
 @Entity
 @Getter
 @NoArgsConstructor
+@ToString
 public class News extends BaseEntity {
 
     private String author;

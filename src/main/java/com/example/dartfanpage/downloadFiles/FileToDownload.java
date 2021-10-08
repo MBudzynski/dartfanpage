@@ -24,4 +24,9 @@ public class FileToDownload extends BaseEntity {
         this.fileName = fileName;
         this.description = description;
     }
+
+    public FileToDownload(String fileName, String description) {
+        this.fileName = fileName;
+        this.description = description;
+    }
 }

@@ -22,7 +22,7 @@ public class NewsService {
     private final CommentRepository commentRepository;
 
     public List<NewsDto> getAllNews() {
-        return newsRepository.findAll().stream().map(news -> NewsDto.toDto(news)).collect(Collectors.toList());
+        return newsRepository.findAllWithSort().stream().map(news -> NewsDto.toDto(news)).collect(Collectors.toList());
     }
 
     public String saveNews(NewsDto newsDto ,MultipartFile mainPicture, MultipartFile[] pictures) {

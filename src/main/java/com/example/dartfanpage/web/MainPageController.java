@@ -95,12 +95,12 @@ public class MainPageController {
 
     @PostMapping("/addComment")
     @PreAuthorize("isAuthenticated()")
-    String addComment(@RequestParam Long id,@RequestParam String author,
+    String addComment(@RequestParam Long id,
                       @RequestParam String text, Model model){
         Map<String, String> commentError = commentValidator.isValid(text);
         if(commentError.isEmpty()){
             NewsDto newsDto = newsService.findNewsById(id).get();
-            CommentDto commentDto = CommentDto.builder().author(author).text(text)
+            CommentDto commentDto = CommentDto.builder().author(SecurityContextHolder.getContext().getAuthentication().getName()).text(text)
                     .dataTime(LocalDateTime.now()).news(newsDto).build();
             newsService.addComment(commentDto);
 
