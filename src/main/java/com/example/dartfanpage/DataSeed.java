@@ -56,12 +56,13 @@ public class DataSeed implements InitializingBean {
             return;
         }
 
-        List<Picture> pictures1 = new ArrayList<>();
+        List<Picture> pictures = new ArrayList<>();
 
         News news0 = new News().toBuilder().author("Admin")
                 .publicationDate(LocalDate.of(2021,9,17))
                 .mainPicture("maxresdefault.jpg")
-                .pictures(pictures1).title("Zakończenie Nordic Darts Masters 2021")
+                .pictures(pictures)
+                .title("Zakończenie Nordic Darts Masters 2021")
                 .headline("Jutro odbęda się ćwierćfinały, półfinały i finał Nordic Darts Masters 2021!!!")
                 .text("W dniu jutrzejszym czeka nas duża dawka emocji. W jednym dniu będą rozgrywane ćwierćfinały, półfinały i finał Nordic Darts Masters 2021. " +
                         "Będzie to bardzo duże obciążenie dla zawodników. Niestety w zawodach zabraknie Krzysztofa Ratajskiego. Serdecznie zapraszamy do oglądania!").build();
@@ -69,7 +70,7 @@ public class DataSeed implements InitializingBean {
         News news1 = new News().toBuilder().author("Admin")
                 .title("Rozpoczęcie World Grand Prix 2021")
                 .publicationDate(LocalDate.of(2021,10,1))
-                .pictures(pictures1)
+                .pictures(pictures)
                 .mainPicture("Darts-World-Grand-Prix-Prize-Money.jpg")
                 .headline("W najbliższą niedzielę o godzinie 19:00 rozpocznie się kolejna edycja World Grand Prix 2021")
                 .text("Transmisja będzie prowadzona na żywo na kanale TVP Sport. Wśród uczestników pojawi się również Krzysztof Ratajski." +
@@ -78,7 +79,7 @@ public class DataSeed implements InitializingBean {
         News news2 = new News().toBuilder().author("Admin")
                 .title("World Grand Prix 2021 rozpoczęte! Rundę 1 czas zacząć!")
                 .publicationDate(LocalDate.of(2021,10,3))
-                .pictures(pictures1)
+                .pictures(pictures)
                 .mainPicture("Darts-World-Grand-Prix-Prize-Money.jpg")
                 .headline("Dzisiaj o godzinie 19:00 rozpocznie się 1 Runda World Grand Prix 2021")
                 .text("Transmisja będzie prowadzona na żywo na kanale TVP Sport. W dniu dzisiejszym będziemy oglądać pojedynki 8 par graczy." +
@@ -91,7 +92,7 @@ public class DataSeed implements InitializingBean {
                 .title("Krzysztof Ratajski przechodzi do Rundy 2!!!")
                 .publicationDate(LocalDate.of(2021,10,4))
                 .mainPicture("KRatajski.jpg")
-                .pictures(addPictures())
+                .pictures(addPictures("KRatajski1.jpg", "KRatajski2.jpg"))
                 .comments(comments)
                 .headline("Polak po zażatrej walce z Nathan Aspinall ostatecznie odnosi zwycięstwo i przechodzi do Rundy 2")
                 .text("Pierwszy set należał do Aspinalla jednakże Ratajski walczył do samego końca. W piątym secie Aspinall ustrzelił najpierw 180, a w kolejnych rzutach 140 punktów. Odskoczył tym samym Ratajskiemu wygrywając partię 3:2. " +
@@ -101,7 +102,7 @@ public class DataSeed implements InitializingBean {
                         " Jego rywalem w kolejnej rundzie będzie Rob Cross. Transmisja z tego meczu w TVP Sport.").build();
 
         Comment comment = new Comment().toBuilder()
-                .dataTime(LocalDateTime.of(LocalDate.of(2021,10,05), LocalTime.of(10,31)))
+                .dataTime(LocalDateTime.of(LocalDate.of(2021,10,5), LocalTime.of(10,31)))
                 .author("Admin")
                 .text("Gratulacje!!! Tylko tak dalej!!!")
                 .news(news3).build();
@@ -110,8 +111,8 @@ public class DataSeed implements InitializingBean {
         News news4 = new News().toBuilder().author("Admin")
                 .title("Dwóch czołowych zawodników odpada w 1 Rudnie World Grand Prix 2021 !!!")
                 .publicationDate(LocalDate.of(2021,10,4))
-                .pictures(pictures1)
                 .mainPicture("Darts-World-Grand-Prix-Prize-Money.jpg")
+                .pictures(pictures)
                 .headline("Peter Wright i Michael van Gerwen odpadają z 1 Rundy World Grand Prix 2021")
                 .text("Peter Wright zajmujący drugie miejsce w światowym rankingu przegrywa swój pojedynek z Robem Cross. " +
                         "Pomimo zażartej walki między zawodnikami Cross nie dał żadnych szans Wrightowi i wygrywa 1 Rundę 2:0." +
@@ -120,22 +121,64 @@ public class DataSeed implements InitializingBean {
                         " Runda 2 będzie transmitowana 05.10.2021 w TVP Sport o godzinie 20:00. Zapraszamy do kibicowania!!!"
                 ).build();
 
+        News news5 = new News().toBuilder().author("Admin")
+                .title("Krzysztof Ratajski przechodzi do ćwierćfinału World Grand Prix")
+                .publicationDate(LocalDate.of(2021,10,7))
+                .mainPicture("RatajskiCross1.jpg")
+                .pictures(pictures)
+                .headline("Ratajski w pięknym stylu pokonuje Roba Crossa 3:1 i wywalcza sobie awans do ćwierćfinału!")
+                .text("Peter Wright zajmujący drugie miejsce w światowym rankingu przegrywa swój pojedynek z Robem Cross. " +
+                        "Od pierwszego seta ratajski grał na najwyższym poziomie i nie dawał Crossowi szans na chwilę oddechu. Pierwszy set zakończył się 3:1 dla Polaka" +
+                        "Drugi set był słabszy w wykonaniu naszego rodaka. Ratajski miał problem przy wejściu na dablach oraz nie był wstanie wykorzystywać pomyłek Creossa. Spowodowało to, że Anglik zremisował w setach 1:1." +
+                        "W trzecim secie oglądaliśmy wyrównaną walkę pomiędzy Polakiem i Anglikiem jednakże to ratajski okazał się być lepszy i wykorzystywał błędy popełnione przez Anglika. " +
+                        "W czwartym secie obaj zawodnicy utrzymywali swoje legi. W decydującym momencie spotkania Cross trafił trzy single, co wykorzystał Polak, w kolejnych podejściach do tarczy i w pięknym stylu kończąc pojedynek. Ratajski awansował do najlepszej ósemki turnieju! W następnym etapie Ratajski zmierzy się z Claytonem. "
+                ).build();
+
+
+        News news6 = new News().toBuilder().author("Admin")
+                .title("Polak przegrywa w ćwierćfinale turnieju World Grand Prix 2021")
+                .publicationDate(LocalDate.of(2021,10,8))
+                .mainPicture("RatajskiVSClayton.jpg")
+                .pictures(pictures)
+                .headline("Ratajski po zaciekłej walce przegrywa starcie z Claytonem i odpada z turnieju!")
+                .text("Pierwszy set był dla Ratajski dosyć nerwowy, chociaż z rzutu na rzut trafiał w coraz lepsze wartości. Najważniejszy okazał się trzeci leg. Polak miał okazję, by objąć prowadzenie, ale zaprezentował bardzo słabą skuteczność na podwójnych, co wykorzystał Clayton zdobywając prowadzenie w setach 1:0. " +
+                        "W drugim secie Polak od wejścia szybko zbudował przewagę. Jednakże Clayton nie dał za wygraną i doprowadził do stanu 2:2. Błąd Walijczyka otworzył Polakowi drogę do wygrania seta. " +
+                        "W trzecim secie oglądaliśmy wyrównaną grę. Obaj zawodnicy mieli problemy ze skutecznością i kolejne legi wygrywali ci, którzy jako pierwsi rozpoczynali grę. " +
+                        "W Czwartym secie Polak miał ogromne problemy z podwójnymi wartościami, przez co nie mógł rozpocząć rozgrywki. Clayton był natomiast prawie bezbłędnie otwierał i kończył legi, dzięki czemu gładko wygrał seta remisując 2:2. " +
+                        "W piątym Ratajski ponownie zaczął słabo i już przy pierwszej okazji dał się przełamać. W dwóch ostatnich legach miał ogromne problemy z wejściem, co wykorzystał rywal, kończąc spotkanie i awansując do półfinału. "
+                ).build();
+
+
+        News news7 = new News().toBuilder().author("Admin")
+                .title("Jonny Clayton wygrał World Grand Prix 2021. ")
+                .publicationDate(LocalDate.of(2021,10,9))
+                .pictures(addPictures("ClaytonPrice1.jpg", "ClaytonPrice2.jpg", "ClaytonPrice3.jpg", "ClaytonPrice4.jpg"))
+                .mainPicture("ClaytonPrice.jpg")
+                .headline("Jonny Clayton triumfatorem World Grand Prix 2021. W sobotnim finale turnieju pewnie pokonał Gerwyna Price'a 5:1. ")
+                .text("Clayton miał przewagę ale Price nie dawał za wygraną. Price trzeciego i czwartego seta przegrał w piątym legu. Price utrzymywał w nim średnią na poziomie 115, a Clayton 111 punktów. Jednak Clayton miał zdecydowanie większą przewagę na podwójnych.  " +
+                        "Clayton prowadził 3:0 i tak naprawdę miał wszystko pod kontrolą. Czwarty set wygrał Price, jednakże w pozostałej części pojedynku grał już słabo przegrywając po czterech legach. Clayton zakończył mecz checkoutem na poziomie 152 punktów."
+                ).build();
+
+
 
         newsRepository.save(news0);
         newsRepository.save(news1);
         newsRepository.save(news2);
         newsRepository.save(news3);
         newsRepository.save(news4);
+        newsRepository.save(news5);
+        newsRepository.save(news6);
+        newsRepository.save(news7);
+
 
     }
 
-    private List<Picture> addPictures() {
+    private List<Picture> addPictures(String... picture) {
         List<Picture> pictures = new ArrayList<>();
-        Picture picture1 = new Picture().toBuilder().pictureName("KRatajski1.jpg").build();
-        Picture picture2 = new Picture().toBuilder().pictureName("KRatajski2.jpg").build();
+        for (int i = 0; i < picture.length ; i++) {
+            pictures.add(new Picture().toBuilder().pictureName(picture[i]).build());
+        }
 
-        pictures.add(picture1);
-        pictures.add(picture2);
         return pictures;
     }
 
