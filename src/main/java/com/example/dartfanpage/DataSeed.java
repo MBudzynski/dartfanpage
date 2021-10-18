@@ -213,7 +213,7 @@ public class DataSeed implements InitializingBean {
                 "Lublin", "20-601",
                 "krakowskie", "1233-12-12", "123456");
 
-        User admin = new User("admin","Adam", "Nowak", "michalbu92@gmail.com", passwordEncoder.encode("admin123"),
+        User admin = new User("admin","Adam", "Nowak", "admin@admin.pl", passwordEncoder.encode("admin123"),
                 "Lublin", "20-601",
                 "krakowskie", "1233-12-12", "123456");
 

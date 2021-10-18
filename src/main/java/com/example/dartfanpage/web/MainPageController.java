@@ -5,7 +5,6 @@ import com.example.dartfanpage.news.NewsService;
 import com.example.dartfanpage.news.NewsValidator;
 import com.example.dartfanpage.news.comment.CommentDto;
 import com.example.dartfanpage.news.comment.CommentValidator;
-import com.example.dartfanpage.tournament.TournamentDto;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -113,5 +112,16 @@ public class MainPageController {
         model.addAttribute("text", "");
         return "newsPage.html";
     }
+
+
+    @GetMapping("/logError")
+    public String displayLoginErrorPage(Model model){
+        model.addAttribute("loginError", "Invalid username or password");
+        model.addAttribute("news", newsService.getAllNews());
+        model.addAttribute("userName", SecurityContextHolder.getContext().getAuthentication().getName());
+        model.addAttribute("activePage", "main");
+        return "main.html";
+    }
+
 
 }

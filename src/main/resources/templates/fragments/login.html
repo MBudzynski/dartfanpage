@@ -8,11 +8,13 @@
 </head>
 <body>
 <div th:fragment="login">
+
     <div class="form">
+            <div style="color: #E21103; background: #E23443" th:if="${loginError}" th:text="*{loginError}"></div>
         <form sec:authorize="!isAuthenticated()" method="post" th:action="@{/login-process}">
-            <h6>Nazwa użytkownika/eMail</h6>
+            <p>Nazwa użytkownika/eMail</p>
             <input name="username" placeholder="Username"><br/>
-            <h6>Hasło</h6>
+            <p>Hasło</p>
             <input name="password" type="password" placeholder="Password"><br/>
 
             <button class="button button2">Zaloguj się</button>

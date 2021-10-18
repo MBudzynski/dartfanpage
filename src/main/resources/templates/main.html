@@ -21,10 +21,39 @@
     <div class="row" >
         <div class="column side">
 
-            <div th:replace="fragments/login :: login" th:remove="tag"></div>
+            <div th:fragment="login">
+
+                <div class="form">
+                    <form sec:authorize="!isAuthenticated()" method="post" th:action="@{/login-process}">
+                        <p style="color: #E21103" th:if="${loginError}" th:text="*{loginError}"><p>
+                        <h6>Nazwa użytkownika/eMail</h6>
+                        <input name="username" placeholder="Username"><br/>
+                        <h6>Hasło</h6>
+                        <input name="password" type="password" placeholder="Password"><br/>
+
+                        <button class="button button2">Zaloguj się</button>
+                    </form>
+
+                    <a sec:authorize="!isAuthenticated()" th:href="@{/forgetPassword}">Nie pamiętam hasła</a>
+
+
+                    <div sec:authorize="isAuthenticated()">
+                        <h4>Witaj: <span th:text="${userName}"></span></h4>
+                    </div>
+
+                    <form sec:authorize="isAuthenticated()" method="post" th:action="@{/logout}">
+                        <button class="button button2">Wyloguj</button>
+                    </form>
+
+                </div>
+
+                <a sec:authorize="!isAuthenticated()" th:href="@{/register}">
+                    <button class="button button2" type="button">Załóż konto</button>
+                </a>
+            </div>
+
 
         </div>
-
         <div class="column middle" >
             <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/addArticle}">
                 <button class="button button2" type="button">Dodaj nowy artykuł</button>
