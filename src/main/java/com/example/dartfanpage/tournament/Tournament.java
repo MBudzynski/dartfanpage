@@ -7,6 +7,7 @@ import com.example.dartfanpage.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Entity;
@@ -19,6 +20,7 @@ import java.time.LocalTime;
 
 @Entity
 @Getter
+@Setter
 @NoArgsConstructor
 public class Tournament extends BaseEntity {
 

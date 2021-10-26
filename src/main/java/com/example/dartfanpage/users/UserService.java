@@ -19,7 +19,6 @@ public class UserService {
     private PasswordEncoder passwordEncoder;
     private UserRepository userRepository;
     private RoleRepository roleRepository;
-    private PasswordResetRepository passwordResetRepository;
     private EmailSender emailSender;
 
 

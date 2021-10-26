@@ -1,5 +1,6 @@
 package com.example.dartfanpage.tournament;
 
+import com.example.dartfanpage.exception.NoExistException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -31,13 +32,18 @@ public class TournamentService {
 
     public void update(TournamentDto dto) {
         Tournament tournament = tournamentRepository.findById(dto.getId())
-                .orElseThrow(() -> new RuntimeException("Nie znaleziono produktu o id: " + dto.getId()));
+                .orElseThrow(() -> new NoExistException(String.format("Object with id %d not exist", dto.getId())));
         tournament.apply(dto);
         tournamentRepository.save(tournament);
     }
 
     public void delete(Long id) {
-        tournamentRepository.deleteById(id);
+        if(tournamentRepository.existsById(id)){
+            tournamentRepository.deleteById(id);
+        } else {
+            throw new NoExistException(String.format("Object with id %d not exist", id));
+        }
+
     }
 
     private void removeExpiredTournaments(){

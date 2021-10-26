@@ -17,7 +17,6 @@ public class GalleryService {
         try {
             galleryDao.saveFile(imageFile, "gallery", prepareImageFileName(ran));
         } catch (Exception e) {
-            System.out.println("File don't save!!!");
             e.printStackTrace();
         }
     }

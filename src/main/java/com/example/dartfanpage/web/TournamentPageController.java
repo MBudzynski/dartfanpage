@@ -5,6 +5,7 @@ import com.example.dartfanpage.tournament.TournamentService;
 import com.example.dartfanpage.tournament.TournamentValidator;
 import lombok.AllArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -12,7 +13,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
-import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Map;
@@ -29,22 +29,21 @@ public class TournamentPageController {
     @GetMapping("/tournaments")
     String tournamentsList(Model model) {
         model.addAttribute("tournaments", tournamentService.getCurrentTournaments());
-        model.addAttribute("userName", SecurityContextHolder.getContext().getAuthentication().getName());
-        model.addAttribute("activePage", "tournaments");
+        addAttributesToModel(model);
         return "tournament.html";
     }
 
     @GetMapping("/addEditTournament")
     @PreAuthorize("hasRole('ADMIN')")
     String displayAddEditTournamentPage(Model model, TournamentDto dto) {
-        model.addAttribute("activePage", "tournaments");
-        model.addAttribute("userName", SecurityContextHolder.getContext().getAuthentication().getName());
+        addAttributesToModel(model);
         model.addAttribute("tournament", dto);
         return "addEditTournament.html";
     }
 
     @PostMapping("/tournaments")
     @PreAuthorize("hasRole('ADMIN')")
+    @ResponseStatus( HttpStatus.CREATED)
     String addOrEditTournament(@RequestParam(required = false) Long id,
                                @RequestParam String placeName,
                                @RequestParam String city,
@@ -53,7 +52,7 @@ public class TournamentPageController {
                                @RequestParam String zipCode,
                                @RequestParam String postOffice,
                                @RequestParam("data") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate data,
-                               @RequestParam LocalTime startAt,
+                               @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.TIME) LocalTime startAt,
                                @RequestParam BigDecimal entryFee,
                                Model model) {
 
@@ -70,12 +69,11 @@ public class TournamentPageController {
             }
             return "redirect:/tournaments";
         }
-        model.addAttribute("activePage", "tournaments");
-        model.addAttribute("userName", SecurityContextHolder.getContext().getAuthentication().getName());
+
+        addAttributesToModel(model);
         model.addAttribute("tournament", dto);
         model.addAllAttributes(errorMap);
         return "addEditTournament.html";
-
 
     }
 
@@ -96,6 +94,12 @@ public class TournamentPageController {
     String deleteTournament(@PathVariable Long id) {
         tournamentService.delete(id);
         return "redirect:/tournaments";
+    }
+
+    private Model addAttributesToModel(Model model){
+        model.addAttribute("activePage", "tournaments");
+        model.addAttribute("userName", SecurityContextHolder.getContext().getAuthentication().getName());
+        return model;
     }
 
 
