@@ -2,6 +2,7 @@ package com.example.dartfanpage.tournament;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -11,7 +12,7 @@ import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-
+@SpringBootTest
 class TournamentValidatorTest {
 
     @Autowired
@@ -24,7 +25,6 @@ class TournamentValidatorTest {
         //when
         Map<String, String> errors = validator.isValid(tournamentDto);
         //than
-        errors.values().forEach(s -> System.out.println(s));
         assertThat(errors.isEmpty()).isTrue();
     }
 

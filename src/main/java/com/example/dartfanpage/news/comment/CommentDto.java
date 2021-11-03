@@ -32,6 +32,7 @@ public class CommentDto {
                 .build();
     }
 
+
     public static CommentDto toDto(Comment comment){
         return CommentDto.builder()
                 .id(comment.getId())

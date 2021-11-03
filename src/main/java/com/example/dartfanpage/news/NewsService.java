@@ -19,7 +19,6 @@ public class NewsService {
     private final ImageDao imageDao = ImageDao.getInstance();
 
     private final NewsRepository newsRepository;
-    private final CommentRepository commentRepository;
 
     public List<NewsDto> getAllNews() {
         return newsRepository.findAllWithSort().stream().map(news -> NewsDto.toDto(news)).collect(Collectors.toList());
@@ -58,8 +57,11 @@ public class NewsService {
       return Arrays.stream(pictures).map(picture -> PictureDto.builder().pictureName(picture.getOriginalFilename()).build()).collect(Collectors.toList());
     }
 
-    public void addComment(CommentDto commentDto) {
+    public void addComment(CommentDto commentDto, Long id) {
+        News news = newsRepository.findById(id).get();
+        commentDto.setNews(NewsDto.toDto(news));
         Comment comment = commentDto.fromDto();
-        commentRepository.save(comment);
+        news.addCommentToNews(comment);
+        newsRepository.save(news);
     }
 }

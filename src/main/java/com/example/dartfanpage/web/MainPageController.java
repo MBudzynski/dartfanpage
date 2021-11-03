@@ -31,8 +31,7 @@ public class MainPageController {
     @GetMapping("/")
     public String displayMainPage(Model model){
         model.addAttribute("news", newsService.getAllNews());
-        model.addAttribute("userName", SecurityContextHolder.getContext().getAuthentication().getName());
-        model.addAttribute("activePage", "main");
+        addAttributesToModel(model);
         return "main.html";
     }
 
@@ -72,8 +71,7 @@ public class MainPageController {
                 return "addArticle.html";
             }
         }
-        model.addAttribute("activePage", "main");
-        model.addAttribute("userName", SecurityContextHolder.getContext().getAuthentication().getName());
+        addAttributesToModel(model);
         model.addAllAttributes(newsError);
         model.addAttribute("news", newsDto);
         return "addArticle.html";
@@ -86,8 +84,7 @@ public class MainPageController {
             return "redirect:/";
         }
         model.addAttribute("news", newsById.get());
-        model.addAttribute("activePage", "main");
-        model.addAttribute("userName", SecurityContextHolder.getContext().getAuthentication().getName());
+        addAttributesToModel(model);
         model.addAttribute("text", "");
         return "newsPage.html";
     }
@@ -98,17 +95,15 @@ public class MainPageController {
                       @RequestParam String text, Model model){
         Map<String, String> commentError = commentValidator.isValid(text);
         if(commentError.isEmpty()){
-            NewsDto newsDto = newsService.findNewsById(id).get();
             CommentDto commentDto = CommentDto.builder().author(SecurityContextHolder.getContext().getAuthentication().getName()).text(text)
-                    .dataTime(LocalDateTime.now()).news(newsDto).build();
-            newsService.addComment(commentDto);
+                    .dataTime(LocalDateTime.now()).build();
+            newsService.addComment(commentDto,id);
 
             return "redirect:/news/" + id;
         }
         model.addAllAttributes(commentError);
         model.addAttribute("news", newsService.findNewsById(id).get());
-        model.addAttribute("userName", SecurityContextHolder.getContext().getAuthentication().getName());
-        model.addAttribute("activePage", "main");
+        addAttributesToModel(model);
         model.addAttribute("text", "");
         return "newsPage.html";
     }
@@ -118,9 +113,14 @@ public class MainPageController {
     public String displayLoginErrorPage(Model model){
         model.addAttribute("loginError", "Invalid username or password");
         model.addAttribute("news", newsService.getAllNews());
-        model.addAttribute("userName", SecurityContextHolder.getContext().getAuthentication().getName());
-        model.addAttribute("activePage", "main");
+        addAttributesToModel(model);
         return "main.html";
+    }
+
+    private Model addAttributesToModel(Model model){
+        model.addAttribute("activePage", "main");
+        model.addAttribute("userName", SecurityContextHolder.getContext().getAuthentication().getName());
+        return model;
     }
 
 

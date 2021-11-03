@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
@@ -24,7 +23,6 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -60,12 +58,12 @@ class TournamentPageControllerTest {
         //than
         List<TournamentDto> list = objectMapper.convertValue(mvcResult.getModelAndView().getModel().get("tournaments"), new TypeReference<List<TournamentDto>>(){});
         TournamentDto tournamentDto =list.stream().filter(tour-> tour.getId().equals(newTournament.getId())).findFirst().get();
+        assertThat(tournamentDto).isNotNull();
         assertThat(tournamentDto.getId()).isEqualTo(newTournament.getId());
         assertThat(tournamentDto.getCity()).isEqualTo(newTournament.getCity());
         assertThat(tournamentDto.getPostOffice()).isEqualTo(newTournament.getPostOffice());
         assertThat(tournamentDto.getZipCode()).isEqualTo(newTournament.getZipCode());
         assertThat(tournamentDto.getEntryFee()).isEqualTo(newTournament.getEntryFee());
-        assertThat(tournamentDto).isNotNull();
     }
 
     @Test
@@ -76,7 +74,7 @@ class TournamentPageControllerTest {
         Tournament newTournament = populateTournament();
         repository.save(newTournament);
         //when
-        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/tournaments/" + newTournament.getId()+100L))
+        mockMvc.perform(MockMvcRequestBuilders.get("/tournaments/" + newTournament.getId()+100L))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/tournaments"))
@@ -101,12 +99,13 @@ class TournamentPageControllerTest {
                 .andReturn();
         //than
         TournamentDto tournament = objectMapper.convertValue(mvcResult.getModelAndView().getModel().get("tournament"), TournamentDto.class);
+        assertThat(tournament).isNotNull();
         assertThat(tournament.getId()).isEqualTo(newTournament.getId());
         assertThat(tournament.getCity()).isEqualTo(newTournament.getCity());
         assertThat(tournament.getPostOffice()).isEqualTo(newTournament.getPostOffice());
         assertThat(tournament.getZipCode()).isEqualTo(newTournament.getZipCode());
         assertThat(tournament.getEntryFee()).isEqualTo(newTournament.getEntryFee());
-        assertThat(tournament).isNotNull();
+
     }
 
     @Test
@@ -118,7 +117,7 @@ class TournamentPageControllerTest {
         repository.save(newTournament);
 
         //when
-        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/tournamentDelete/" + newTournament.getId().toString()))
+        mockMvc.perform(MockMvcRequestBuilders.get("/tournamentDelete/" + newTournament.getId().toString()))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().is3xxRedirection())
                 .andExpect(redirectedUrl("/tournaments"))
@@ -134,14 +133,14 @@ class TournamentPageControllerTest {
     void shouldAddNewTournamentToRepository() throws Exception {
         //given
         //when
-        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/tournaments")
+        mockMvc.perform(MockMvcRequestBuilders.post("/tournaments")
                         .param("placeName", "Lotka")
                         .param("city","Lublin")
                         .param("street","Zamojska")
                         .param("venueNumber","5A")
                         .param("zipCode","20-601")
                         .param("postOffice","Lublin")
-                        .param("data", LocalDate.now().plusDays(10L).format(DateTimeFormatter.ISO_DATE).toString())
+                        .param("data", LocalDate.now().plusDays(10L).format(DateTimeFormatter.ISO_DATE))
                         .param("startAt", LocalTime.now().toString())
                         .param("entryFee", "150"))
                 .andDo(MockMvcResultHandlers.print())
@@ -159,7 +158,7 @@ class TournamentPageControllerTest {
         Tournament tournament = populateTournament();
         repository.save(tournament);
         //when
-        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/tournaments")
+        mockMvc.perform(MockMvcRequestBuilders.post("/tournaments")
                         .param("id", tournament.getId().toString())
                         .param("placeName", "Lotka")
                         .param("city", "Lublin")

@@ -68,4 +68,8 @@ public class News extends BaseEntity {
                 .map(equipment -> equipment.toBuilder().news(this).build())
                 .collect(Collectors.toUnmodifiableList());
     }
+
+    public void addCommentToNews(Comment comment){
+        this.comments.add(comment);
+    }
 }

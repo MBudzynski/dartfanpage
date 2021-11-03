@@ -11,9 +11,10 @@ public class CommentValidator {
     public Map<String, String> isValid(String text) {
         Map<String, String> errors = new HashMap<>();
 
-        if(text.isBlank() || text.isEmpty()) {
-            errors.put("commentTextError", "Treść komentarza jest wymagana");
+        if( text == null || text.isBlank() || text.isEmpty()) {
+            errors.put("commentTextError", "Text of comment is required!");
         }
+
         return errors;
     }
 }
