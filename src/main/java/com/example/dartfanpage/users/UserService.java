@@ -1,9 +1,9 @@
 package com.example.dartfanpage.users;
 
 import com.example.dartfanpage.contact.EmailSender;
-import com.example.dartfanpage.users.resetPassword.PasswordResetRepository;
 import com.example.dartfanpage.users.resetPassword.PasswordResetToken;
 import lombok.AllArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -31,6 +31,7 @@ public class UserService {
         }
 
         User user = User.fromDto(dto, dto.getPassword());
+        user.setPasswordHash(new BCryptPasswordEncoder().encode(user.getPasswordHash()));
         Role role = roleRepository.findByRoleName(Role.USER).orElseThrow(() -> new RuntimeException("Nie znaleziono roli!"));
         user.addRole(role);
         userRepository.save(user);
@@ -46,7 +47,6 @@ public class UserService {
         userRepository.save(user);
         String url = ServletUriComponentsBuilder.fromCurrentRequest().toUriString() + "/?token=" + token;
         emailSender.sendPasswordResetTokenEmail(user.geteMail(), url);
-
     }
 
     private PasswordResetToken createPasswordResetTokenForUser(String token) {

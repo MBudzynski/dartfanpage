@@ -4,8 +4,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.Part;
-import java.io.File;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,8 +23,7 @@ public class FileToDownloadService {
         }
     }
 
-
     public List<FileToDownloadDto> getFileToDownload() {
-        return fileToDownloadRepository.findAll().stream().map(file -> FileToDownloadDto.toDto(file)).collect(Collectors.toList());
+        return fileToDownloadRepository.findAll().stream().map(FileToDownloadDto::toDto).collect(Collectors.toList());
     }
 }

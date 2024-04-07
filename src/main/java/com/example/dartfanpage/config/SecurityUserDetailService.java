@@ -33,5 +33,4 @@ public class SecurityUserDetailService implements UserDetailsService {
         return new org.springframework.security.core.userdetails.User(user.getUserName(),
                 user.getPasswordHash(), authorities);
     }
-
 }

@@ -29,7 +29,7 @@ public class RegistrationValidator {
         if (dto.getZipCode() == null || !dto.getZipCode().matches("^[0-9]{2}(-[0-9]{3})$")) {
             errors.put("zipCodeError", "Zły format. Kod pocztowy powinien mieć format 12-345");
         }
-        if (dto.getStreet() == null || !dto.getStreet().matches("^[A-Z][a-z]{2,}(( [A-Z|a-z][a-z]{1,})+)?$")) {
+        if (dto.getStreet() == null || dto.getStreet().isBlank()) {
             errors.put("streetError", "Podanie nazwy ulicy jest wymagane.");
         }
         if (dto.getBirthDate() == null || !dto.getBirthDate().matches("^(19|20)[0-9]{2}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[0-1])$")) {
@@ -38,7 +38,6 @@ public class RegistrationValidator {
         if (dto.getPhone() == null || !dto.getPhone().matches("^((\\+[48]{2}( ))?)(([0-9]{3})( |-[0-9]{3})( |-[0-9]{3})|[0-9]{9})$")) {
             errors.put("phoneError", "Zły format. Numer telefonu powinien składać się z 9 cyfr i mieć format xxx xxx xxx lub xxx-xxx-xxx");
         }
-
 
         return errors;
     }
