@@ -6,7 +6,7 @@
     <link th:href="@{/css/navigation.css}" rel="stylesheet"/>
     <link th:href="@{/css/main.css}" rel="stylesheet"/>
     <link th:href="@{/css/button.css}" rel="stylesheet"/>
-    <link th:href="@{/css/table.css}" rel="stylesheet" />
+    <link th:href="@{/css/table.css}" rel="stylesheet"/>
     <link th:href="@{/css/forms.css}" rel="stylesheet"/>
     <title>Dart Polska</title>
 </head>
@@ -19,12 +19,12 @@
 <div class="nav" th:replace="fragments/navigation :: headerNavigation" th:remove="tag"></div>
 
 <div id="page-conteiner">
-    <div class="row" >
+    <div class="row">
         <div class="column side">
             <div th:replace="fragments/login :: login" th:remove="tag"></div>
         </div>
 
-        <div class="column middle" >
+        <div class="column middle">
 
             <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/addEditTournament}">
                 <button class="button button2" type="button">Dodaj nowy turniej</button>
@@ -44,7 +44,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="tournament, iterStat : ${tournaments}" >
+                <tr th:each="tournament, iterStat : ${tournaments}">
                     <td>
                         <h5><span th:text="${tournament.placeName}"/></h5>
                         <h6><span th:text="${tournament.city}"/></h6>
@@ -68,7 +68,7 @@
                         </a></br>
                         </br>
                         <a th:href="@{/tournamentDelete/{id}(id=${tournament.id})}">
-                            <button class="button3"  type="button">Usuń</button>
+                            <button class="button3" type="button">Usuń</button>
                         </a>
                     </td>
                 </tr>

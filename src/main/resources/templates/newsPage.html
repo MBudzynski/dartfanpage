@@ -8,6 +8,7 @@
     <link th:href="@{../css/gallery.css}" rel="stylesheet"/>
     <link th:href="@{/css/button.css}" rel="stylesheet"/>
     <link th:href="@{/css/forms.css}" rel="stylesheet"/>
+    <link th:href="@{/css/comment.css}" rel="stylesheet"/>
     <link rel="stylesheet" type="text/css" th:href="@{lightbox/css/lightbox.min.css}">
     <script th:src="@{lightbox/js/lightbox-plus-jquery.min.js}"></script>
     <title>Dart Polska</title>
@@ -47,9 +48,9 @@
 
 
             <div th:each="comment, iterStat : ${news.comments}">
-                <div>
-                    <p><time th:text="${#temporals.format(comment.dataTime, 'dd-MM-yyyy HH:mm')}"></time> <span th:text="${comment.author}"/>  napisał:</p>
-                    <h5><span th:text="${comment.text}"/></h5>
+                <div class="comment">
+                    <div class="comment-header"><time class="data " th:text="${#temporals.format(comment.dataTime, 'dd-MM-yyyy HH:mm')}"></time>   <span th:text="${comment.author}"/>: </div>
+                    <p class="text"><span th:text="${comment.text}"/></p>
                 </div>
             </div>
 

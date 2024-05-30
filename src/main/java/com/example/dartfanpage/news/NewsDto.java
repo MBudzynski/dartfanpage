@@ -13,7 +13,7 @@ import java.util.List;
 
 @Getter
 @Setter
-public class NewsDto {
+public class  NewsDto {
 
     private Long id;
     private String author;

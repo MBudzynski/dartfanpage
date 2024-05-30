@@ -24,10 +24,12 @@ input[type=submit]:hover {
 }
 
 .form {
+    display: inline-block;
+    text-align: center;
     border-radius: 5px;
-    background-color: #f2f2f2;
-    padding: 20px;
+    padding:15%;
 }
+
 
 .article textarea{
     height: 300px;

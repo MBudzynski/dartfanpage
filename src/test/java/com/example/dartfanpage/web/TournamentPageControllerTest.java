@@ -74,7 +74,7 @@ class TournamentPageControllerTest {
         Tournament newTournament = populateTournament();
         repository.save(newTournament);
         //when
-        mockMvc.perform(MockMvcRequestBuilders.get("/tournaments/" + newTournament.getId()+100L))
+        mockMvc.perform(MockMvcRequestBuilders. get("/tournaments/" + newTournament.getId()+100L))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/tournaments"))

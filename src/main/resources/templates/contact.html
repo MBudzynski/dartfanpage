@@ -5,8 +5,9 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link th:href="@{/css/navigation.css}" rel="stylesheet"/>
     <link th:href="@{/css/main.css}" rel="stylesheet"/>
+    <link th:href="@{/css/forms.css}" rel="stylesheet"/>
     <link th:href="@{/css/button.css}" rel="stylesheet"/>
-    <link th:href="@{../css/contact.css}" rel="stylesheet" />
+    <link th:href="@{../css/contact.css}" rel="stylesheet"/>
     <title>Dart Polska</title>
 </head>
 <body>
@@ -18,19 +19,20 @@
 <div class="nav" th:replace="fragments/navigation :: headerNavigation" th:remove="tag"></div>
 
 <div id="page-conteiner">
-    <div class="row" >
+    <div class="row">
+
         <div class="column side">
             <div th:replace="fragments/login :: login" th:remove="tag"></div>
         </div>
 
-        <div class="column middle" >
+        <div class="column middle">
 
             <div class="container">
 
                 <div style="text-align:center">
                     <div th:if="${success}" class="w3-panel w3-green">
                         <h3>Success!</h3>
-                        <p th:text="${success}" ></p>
+                        <p th:text="${success}"></p>
                     </div>
                 </div>
 
@@ -47,15 +49,18 @@
                         <h4>Masz pytanie? Napisz do nas !!!</h4>
                         <form method="post" th:action="@{/sendEmail}" th:object="${eMail}">
                             <label for="eMailAddress">Email</label>
-                            <input th:field="*{eMailAddress}" type="text" id="eMailAddress" name="eMailAddress" placeholder="Temat wiadomości">
+                            <input th:field="*{eMailAddress}" type="text" id="eMailAddress" name="eMailAddress"
+                                   placeholder="Temat wiadomości">
                             <p class="error" th:text="${emailAddressError}" th:if="${emailAddressError}"></p>
 
                             <label for="theme">Tytuł</label>
-                            <input th:field="*{title}" type="text" id="theme" name="title" placeholder="Twój adress e-mail">
+                            <input th:field="*{title}" type="text" id="theme" name="title"
+                                   placeholder="Twój adress e-mail">
                             <p class="error" th:text="${titleError}" th:if="${titleError}"></p>
 
                             <label for="text">Wiadomość</label>
-                            <textarea th:field="*{text}" id="text" name="text" placeholder="Text wiadomości..." style="height:200px"></textarea>
+                            <textarea th:field="*{text}" id="text" name="text" placeholder="Text wiadomości..."
+                                      style="height:200px"></textarea>
                             <p class="error" th:text="${textError}" th:if="${textError}"></p>
 
                             <button class="button button2">Wyślij</button>

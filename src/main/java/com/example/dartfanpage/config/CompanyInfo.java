@@ -15,7 +15,6 @@ public class CompanyInfo {
     private Address address;
     private ContactDetails contactDetails;
 
-
         @Getter
         @Setter
         static class Address {
