@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link th:href="@{/css/navigation.css}" rel="stylesheet"/>
+    <link th:href="@{/css/main.css}" rel="stylesheet"/>
+    <link th:href="@{/css/forms.css}" rel="stylesheet"/>
+    <link th:href="@{/css/button.css}" rel="stylesheet"/>
+    <link th:href="@{../css/contact.css}" rel="stylesheet"/>
+    <title>Dart Polska</title>
+</head>
+<body>
+
+<div class="header">
+    <p>Dart Polska</p>
+</div>
+
+<div class="nav" th:replace="fragments/navigation :: headerNavigation" th:remove="tag"></div>
+
+<div id="page-conteiner">
+    <div class="row">
+
+        <div class="column side">
+            <div th:replace="fragments/login :: login" th:remove="tag"></div>
+        </div>
+
+        <div class="column middle">
+            Dart to gra w każdej liczy się dobre oko i stabilna ręka.
+            Jeśli natomiast mówimy o grze najpopularniejszej jest nią "501".
+            <br>
+            <br>
+            Zasady gry są stosunkowo proste. Każdy z graczy
+            rozpoczyna grę od 501 punktów na tarczy, dążąc do tego, aby jak najszybciej wyzerować licznik.
+            Zwycięstwo w jednej partii oznacza wgranego lega. Mecz w zależności od rozgrywki może
+            składać się z setów w których skład wchodzą legi. Wówczas na zwycięstwo w secie potrzeba wygrania trzech legów.
+            <br>
+            <img style="padding: 10%" th:src="@{'/images/odlgeglosc.png'}"/>
+            <img style="padding: 4%" th:src="@{'/images/tarcza.png'}"/>
+            <br>
+            Gracze zbijają punkty, rzucając na przemian trzema lotkami do podzielonej na dwadzieścia sektorów (nr 1-20).
+            Poza punktacją pojedynczą na tarczy znajdują się okręgi zliczające lotki jako potrójne lub podwójne.
+            Tym samym jeden rzut może dać graczowi od 0 do nawet 60 punktów (potrójna 20-tka). W jednej serii maksymalny wynik
+            gracza to natomiast 180 pkt (3 rzuty x (3x20 punktów)). Na tarczy znajdują się jeszcze dwa najmniejsze
+            okręgi stanowiące centrum tarczy - "pole bull" i "bull's eye", które punktowane są za 25 i 50 pkt.
+            <br>
+            <br>
+            Zauważmy tu, że tarcza wykonany jest najczęściej z sizalu lub plastiku, jej środek zawieszony
+            jest na wysokości 1,73 m. Gracz oddaje rzut do tarczy z odległości 2,37 m.
+            <br>
+            <br>
+            Ze skalą trudności związane jest również zakończenie jednego lega. Można umówić się,
+            że zakończenie lega będzie mieć miejsce, kiedy punktację wyzeruje się pojedyńczym żutem. W grze
+            profesjonalnej leg kończy się trafieniem podwójnym lub trafieniem w "bull's eye", kiedy do zakończenia
+            lega brakuje 50 pkt.
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
