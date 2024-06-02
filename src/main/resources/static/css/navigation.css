@@ -32,3 +32,10 @@ li a:hover:not(.active) {
 .active {
     background-color: #04AA6D;
 }
+
+.error {
+    padding-left: 20px;
+    color: #ffffff;
+    background: #E11111;
+    border-radius: 15px;
+}

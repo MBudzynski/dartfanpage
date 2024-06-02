@@ -25,51 +25,51 @@
 
         <div class="column middle">
 
-            <div class="form">
+            <div>
                 <form method="post" th:action="@{register}" th:object="${registrationUserDto}">
 
-                    <label>User name</label>
+                    <label style="text-align: center">Nazwa użytkownika</label>
                     <input th:field="*{userName}" type="text" name="userName" placeholder="userName">
                     <p class="error" th:text="${userName}" th:if="${userName}"></p>
 
-                    <label>First name</label>
+                    <label style="text-align:center">Imie</label>
                     <input th:field="*{firstName}" type="text" name="firstName" placeholder="firstName">
                     <p class="error" th:text="${firstNameError}" th:if="${firstNameError}"></p>
 
-                    <label>Last name</label>
+                    <label style="text-align:center">Nazwisko</label>
                     <input th:field="*{lastName}" type="text" name="lastName" placeholder="lastName">
                     <p class="error" th:text="${lastNameError}" th:if="${lastNameError}"></p>
 
-                    <label>e-mail</label>
+                    <label style="text-align:center">e-mail</label>
                     <input th:field="*{eMail}" type="text" name="eMail" placeholder="eMail">
                     <p class="error" th:text="${eMailError}" th:if="${eMailError}"></p>
                     <p class="error" th:if="${userFoundMessage}" th:text="${userFoundMessage}"></p>
 
-                    <label>Password</label>
+                    <label style="text-align:center">Hasło</label>
                     <input th:field="*{password}" type="text" name="password" placeholder="password">
                     <p class="error" th:text="${passwordError}" th:if="${passwordError}"></p>
 
-                    <label>City</label>
+                    <label style="text-align:center">Miasto</label>
                     <input th:field="*{city}" type="text" name="city" placeholder="city">
                     <p class="error" th:text="${cityError}" th:if="${cityError}"></p>
 
-                    <label>Zip code</label>
+                    <label style="text-align:center">Kod pocztowy</label>
                     <input th:field="*{zipCode}" type="text" name="zipCode" placeholder="zipCode">
                     <p class="error" th:text="${zipCodeError}" th:if="${zipCodeError}"></p>
 
-                    <label>Street</label>
+                    <label style="text-align:center">Ulica</label>
                     <input th:field="*{street}" type="text" name="street" placeholder="street">
                     <p class="error" th:text="${streetError}" th:if="${streetError}"></p>
 
-                    <label>Birth date</label>
+                    <label style="text-align:center">Data urodzenia</label>
                     <input th:field="*{birthDate}" type="text" name="birthDate" placeholder="birthDate">
                     <p class="error" th:text="${birthDateError}" th:if="${birthDateError}"></p>
 
-                    <label>Phone</label>
+                    <label style="text-align:center">Numer telefonu</label>
                     <input th:field="*{phone}" type="text" name="phone" placeholder="phone">
                     <p class="error" th:text="${phoneError}" th:if="${phoneError}"></p>
 
-                    <button class="button button2">Utwórz konto</button>
+                    <button class="button-success button2">Utwórz konto</button>
                 </form>
             </div>
 

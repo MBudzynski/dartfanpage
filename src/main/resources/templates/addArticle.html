@@ -31,36 +31,36 @@
 
 
                     <div class="article">
-                        <label>Autor</label>
-                        <input th:field="*{news.author}" id="author" name="author" placeholder="Author..." >
-                        <p style="color: white; background-color: red" th:text="${authorError}" th:if="${authorError}"></p>
+                        <label>Autor: </label>
+                        <input style="padding-left: 8px" th:field="*{news.author}" id="author" name="author" placeholder="Author..." >
+                        <p class="error" th:text="${authorError}" th:if="${authorError}"></p>
                     </div>
                     <div class="article">
-                        <label>Zdjęcie główne</label>
-                        <input type="file" name="mainPicture">
+                        <label>Zdjęcie główne </label>
+                        <input style="padding-left: 8px" type="file" name="mainPicture">
                     </div>
                     <div class="article">
-                        <label>Tytuł</label>
-                        <textarea th:field="*{news.title}" id="articleTheme" name="title" placeholder="articleTheme..." ></textarea>
-                        <p style="color: white; background-color: red" th:text="${titleError}" th:if="${titleError}"></p>
+                        <label>Tytuł:</label>
+                        <textarea th:field="*{news.title}" id="articleTheme" name="title" placeholder="articleTheme..." />
+                        <p class="error" th:text="${titleError}" th:if="${titleError}"></p>
                     </div>
                     <div class="article">
-                        <label>Nagłówek</label>
+                        <label>Nagłówek:</label>
                         <textarea th:field="*{news.headline}" id="headline" name="headline" placeholder="Head line..." ></textarea>
-                        <p style="color: white; background-color: red" th:text="${headlineError}" th:if="${headlineError}"></p>
+                        <p class="error"  th:text="${headlineError}" th:if="${headlineError}"></p>
                     </div>
                     <div class="article">
-                        <label>Treść</label>
+                        <label>Treść:</label>
                         <textarea th:field="*{news.text}" id="text" name="text" placeholder="Text..."></textarea>
-                        <p style="color: white; background-color: red" th:text="${textError}" th:if="${textError}"></p>
+                        <p class="error"  th:text="${textError}" th:if="${textError}"></p>
                     </div>
                     <div class="article">
-                        <label>Galeria</label>
-                        <input type="file" name="pictures" multiple placeholder="Text..." >
+                        <label>Galeria:</label>
+                        <input style="padding-left: 8px" type="file" name="pictures" multiple placeholder="Text..." >
                     </div>
 
 
-                    <button class="button button2" >Opublikuj</button>
+                    <button class="button-success button2" >Opublikuj</button>
                 </form>
             </div>
         </div>

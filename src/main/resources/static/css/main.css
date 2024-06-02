@@ -100,5 +100,5 @@ body {
 .article {
     height: auto;
     padding: 20px;
-    text-align: justify;
+    display: inline-flex;
 }

@@ -24,7 +24,7 @@ public class AboutUsController {
     @GetMapping("/aboutUs")
     String displayAboutUsPage(Model model){
         model.addAttribute("files" , fileToDownloadService.getFileToDownload());
-        model.addAttribute("uerNames", SecurityContextHolder.getContext().getAuthentication().getName());
+        model.addAttribute("userName", SecurityContextHolder.getContext().getAuthentication().getName());
         model.addAttribute("activePage", "aboutUs");
 
         return "aboutUs.html";

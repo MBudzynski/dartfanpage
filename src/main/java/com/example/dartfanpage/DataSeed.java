@@ -8,6 +8,8 @@ import com.example.dartfanpage.news.NewsRepository;
 import com.example.dartfanpage.news.comment.Comment;
 import com.example.dartfanpage.news.picture.Picture;
 import com.example.dartfanpage.news.picture.PictureDto;
+import com.example.dartfanpage.tournament.Tournament;
+import com.example.dartfanpage.tournament.TournamentRepository;
 import com.example.dartfanpage.users.Role;
 import com.example.dartfanpage.users.RoleRepository;
 import com.example.dartfanpage.users.User;
@@ -17,11 +19,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 @Service
 public class DataSeed implements InitializingBean {
@@ -38,6 +42,9 @@ public class DataSeed implements InitializingBean {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private TournamentRepository tournamentRepository;
+
 
 
     @Autowired
@@ -49,6 +56,21 @@ public class DataSeed implements InitializingBean {
         populateUsers();
         populateFileToDownload();
         populateArticle();
+        populateTurnament();
+    }
+
+    private void populateTurnament() {
+        Tournament tournament = new Tournament();
+        tournament.setData(LocalDate.now());
+        tournament.setCity("Lublin");
+        tournament.setStreet("Zamkowa");
+        tournament.setEntryFee(BigDecimal.valueOf(15L));
+        tournament.setPlaceName("Nie kasyno");
+        tournament.setPostOffice("Lublin");
+        tournament.setZipCode("20-601");
+        tournament.setStartAt(LocalTime.of(20,0,0));
+        tournament.setVenueNumber("15");
+        tournamentRepository.save(tournament);
     }
 
     private void populateArticle() {

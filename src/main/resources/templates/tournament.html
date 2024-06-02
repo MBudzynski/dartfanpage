@@ -27,7 +27,7 @@
         <div class="column middle">
 
             <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/addEditTournament}">
-                <button class="button button2" type="button">Dodaj nowy turniej</button>
+                <button class="button-success button2" type="button">Dodaj nowy turniej</button>
             </a>
 
 
@@ -40,7 +40,7 @@
                     <th><h5>Adres</h5></th>
                     <th><h5>Data</h5></th>
                     <th><h5>Wpisowe</h5></th>
-                    <th>Action</th>
+                    <th sec:authorize="hasRole('ROLE_ADMIN')"><h5>Action</h5></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -64,11 +64,11 @@
                     </td>
                     <td sec:authorize="hasRole('ROLE_ADMIN')">
                         <a th:href="@{/tournaments/{id}(id=${tournament.id})}">
-                            <button class="button4" type="button">Edytuj</button>
+                            <button class="small-button-success button2" type="button">Edytuj</button>
                         </a></br>
                         </br>
                         <a th:href="@{/tournamentDelete/{id}(id=${tournament.id})}">
-                            <button class="button3" type="button">Usuń</button>
+                            <button class="small-button-error button2" t ype="button">Usuń</button>
                         </a>
                     </td>
                 </tr>

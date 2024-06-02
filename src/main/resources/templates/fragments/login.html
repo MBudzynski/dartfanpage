@@ -11,7 +11,7 @@
 
     <div class="form">
 
-        <div style="color: #E21103; background: #E23443" th:if="${loginError}" th:text="*{loginError}"></div>
+        <div class="error" th:if="${loginError}" th:text="*{loginError}"></div>
 
         <form sec:authorize="!isAuthenticated()" method="post" th:action="@{/login-process}">
             <label>Nazwa użytkownika/e-mail</label>

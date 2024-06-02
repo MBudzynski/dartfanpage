@@ -25,10 +25,10 @@
 
         <div class="column middle" >
 
-            <form sec:authorize="hasRole('ROLE_ADMIN')" style="padding: 20px"  method="post" th:action="@{/addFileToDownload}" enctype="multipart/form-data">
+            <form sec:authorize="hasRole('ROLE_ADMIN')"  method="post" th:action="@{/addFileToDownload}" enctype="multipart/form-data">
                 <input name="description" placeholder="Description..." style="width: 350px">
                 <input type="file" name="fileToDownload">
-                <button class="button button2" >Dodaj</button>
+                <button class="button-success button2" >Dodaj</button>
             </form>
 
             <h4>Strona powstała w celu propagowania kultury fizycznej w szczegółlności Darta wśród dzieci, młodzieży i seniorów

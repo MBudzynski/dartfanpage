@@ -73,6 +73,7 @@ public class MainPageController {
         }
         addAttributesToModel(model);
         model.addAllAttributes(newsError);
+        model.addAttribute("userName", SecurityContextHolder.getContext().getAuthentication().getName());
         model.addAttribute("news", newsDto);
         return "addArticle.html";
     }
@@ -122,6 +123,4 @@ public class MainPageController {
         model.addAttribute("userName", SecurityContextHolder.getContext().getAuthentication().getName());
         return model;
     }
-
-
 }
