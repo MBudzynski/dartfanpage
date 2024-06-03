@@ -26,4 +26,8 @@ public class FileToDownloadService {
     public List<FileToDownloadDto> getFileToDownload() {
         return fileToDownloadRepository.findAll().stream().map(FileToDownloadDto::toDto).collect(Collectors.toList());
     }
+
+    public void removeFile(Long id){
+        fileToDownloadRepository.deleteById(id);
+    }
 }

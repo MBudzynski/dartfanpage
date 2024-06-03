@@ -8,6 +8,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -40,6 +41,13 @@ public class AboutUsController {
 
         fileToDownloadService.saveFileToDownload(fileToDownloadDto, imageFile);
 
+        return "redirect:/aboutUs";
+    }
+
+    @GetMapping("/removeFileToDownload/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    String removeFileToDownload(@PathVariable Long id){
+        fileToDownloadService.removeFile(id);
         return "redirect:/aboutUs";
     }
 }

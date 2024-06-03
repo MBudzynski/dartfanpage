@@ -7,6 +7,7 @@
     <link th:href="@{/css/main.css}" rel="stylesheet"/>
     <link th:href="@{/css/button.css}" rel="stylesheet"/>
     <link th:href="@{../css/forms.css}" rel="stylesheet"/>
+    <link th:href="@{../css/contact.css}" rel="stylesheet"/>
     <title>Dart Polska</title>
 </head>
 <body>
@@ -37,12 +38,13 @@
             <h4 style="padding-top:4%">Pliki do pobrania:</h4>
             <div th:each="file, iterStat : ${files}">
                 <div>
-                    <h5><span th:text="${file.description}"></span><a style="margin-left: 80px; color: mediumblue" th:href="@{/todownload/{fil}(fil=${file.fileName})}" download>Pobierz</a></h5>
+                    <h5><span th:text="${file.description}"></span><a style="margin-left: 80px; color: mediumblue" th:href="@{/todownload/{fil}(fil=${file.fileName})}" download><button class="button-apply button2" type="button">Pobierz</button></a>
+                        <a sec:authorize="hasRole('ROLE_ADMIN')" methods="post" th:href="@{/removeFileToDownload/{id}(id=${file.id})}">
+                            <button class="button-remove button2" type="button">Usuń</button>
+                        </a>
+                    </h5>
                 </div>
             </div>
-
-
-
         </div>
     </div>
 
